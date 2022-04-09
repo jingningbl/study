@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-1.12.4.min.js"></script>
+    <script>
+        function f1() {
+            $('div').empty();
+        }
+        function f2() {
+            $('p').remove();
+        }
+        function f3() {
+            $('p').remove('.dog');
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <h1>落红不是无情物</h1>
+        <p>化作春泥更护花</p>
+        <p class="dog">春蚕到死丝方尽,蜡炬成灰泪始干</p>
+    </div>
+    <input type="button" value="清空" onclick="f1()">
+    <input type="button" value="删除全部p" onclick="f2()">
+    <input type="button" value="删除指定p" onclick="f3()">
+</body>
+
+</html>

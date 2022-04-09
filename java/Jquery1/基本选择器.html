@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-1.12.4.min.js"></script>
+    <script>
+        $(function(){
+            //id选择器
+            let $obj1=$("#d1");
+            console.log($obj1.get(0).innerHTML);
+            //class选择器
+            let $obj2=$(".c1");
+            console.log($obj2);
+            console.log($obj2.get(1).innerHTML);
+            //元素选择器
+            let $obj3=$("p");
+            console.log($obj3);
+            console.log($obj3.get(0).innerHTML);
+            //组合选择器
+            let $obj4=$('h1,p.c2');
+            console.log($obj4);
+        });
+    </script>
+</head>
+<body>
+    <h1>蝶恋花-春景-苏轼</h1>
+    <div id="d1" class="c1">
+        花褪残红青杏小,燕子飞时,绿水人家绕
+    </div>
+    <div id="d2" class="c1">
+        枝上柳绵吹又少,天涯何处无芳草
+    </div>
+    <p>墙里秋千墙外道,墙外行人,墙里佳人笑</p>
+    <p class="c2">
+        笑渐不闻声渐悄,多情总被无情恼
+    </p>
+</body>
+</html>

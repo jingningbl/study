@@ -1,0 +1,63 @@
+/* 取消默认样式 */
+* {
+  /* 外边距 */
+  margin: 0px 0px;
+  /* 内边距 */
+  padding: 0px 0px;
+}
+/* 设置div */
+#di {
+  /* 居中 */
+  text-align: center;
+  /* 外边距 */
+  margin: auto;
+}
+/* 设置列表 */
+#lst {
+  /* 相对定位 */
+  position: relative;
+  /* 外边距 */
+  margin-top: 100px;
+  margin-left: 550px;
+  /* 大小 */
+  width: 386px;
+  height: 307px;
+}
+/* 图片大小 */
+img {
+  width: 386px;
+  height: 307px;
+}
+ul li {
+  /* 绝对定位 */
+  position: absolute;
+  /* 去除列表小点 */
+  list-style-type: none;
+}
+/* 左按钮 */
+.left-l {
+  /* 定位 */
+  position: absolute;
+  /* 位置 */
+  top: 250px;
+  left: 530px;
+}
+/* 按钮样式 */
+#left {
+  width: 100px;
+  height: 100px;
+  background-color: cadetblue;
+}
+/* 右按钮 */
+.right-r {
+  /* 定位 */
+  position: absolute;
+  /* 位置 */
+  top: 250px;
+  left: 940px;
+}
+#right {
+  width: 100px;
+  height: 100px;
+  background-color: cadetblue;
+}

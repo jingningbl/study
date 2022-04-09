@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 此文件必须在使用jQuery代码前使用 -->
+    <script src="./jquery-1.12.4.min.js"></script>
+    <script>
+        //加载方式
+        //当页面加载完成以后执行:包括资源文件信息
+        window.onload=function(){
+            let obj=document.getElementsByTagName("img")[0];
+            console.log(window.getComputedStyle(obj).width);
+        };
+        //1.页面加载,只需要dom加载即可,一些图片资源加载在后面,不需要等待整个页面加载完成才会执行
+        $(document).ready(function(){
+            let $obj=$("img");
+            console.log('jquery:'+$obj.css('width'));
+        });
+        //2.
+        $(function(){
+
+        });
+        //3.
+        jQuery(function(){
+
+        });
+        //4.
+        jQuery(document).ready(function(){
+
+        });
+    </script>
+</head>
+
+<body>
+    <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2F09%2F3a%2Fbc%2F093abce7b31f4c8ffdbf345375ff4abb.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1646186350&t=8e12124a17597cf1c017566ace2b55fc" alt="">
+</body>
+
+</html>

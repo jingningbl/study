@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script>
+    //对象
+    var now = new Object();
+    //属性
+    now.name = "张三";
+    now.age = 23;
+    now.gender = "男";
+    //爱好
+    var aty = new Array();
+    aty.push("唱歌");
+    aty.push("跳舞");
+    aty.push("画画");
+    //吃饭
+    function eat() {
+      console.log("我喜欢吃鱼.");
+    }
+    //睡觉
+    function sleep() {
+      console.log("我想睡觉");
+    }
+    //打豆豆
+    function play() {
+      console.log("打豆豆");
+    }
+    //信息
+    function xin() {
+      console.log(
+        "我是" + now.name + ",今年" + now.age + ",性别" + now.gender
+      );
+    }
+    function hobbies() {
+      for (i = 0; i < aty.length; i++) {
+        console.log(aty[i])
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <!-- 按钮 -->
+  <input type="button" value="信息" onclick="xin()" />
+  <input type="button" value="吃饭" onclick="eat()" />
+  <input type="button" value="睡觉" onclick="sleep()" />
+  <input type="button" value="玩" onclick="play()" />
+  <input type="button" value="爱好" onclick="hobbies()" />
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-1.12.4.min.js"></script>
+    <script>
+        $(function(){
+            //属性过滤器[attribute]
+            let $obj1=$('input[name]');
+            console.log($obj1);
+            //属性过滤器[attribute=value]
+            let $obj2=$("input[name='username']");
+            console.log($obj2);
+            //属性过滤器[attribute!=value]
+            let $obj3=$("input[name!='username']");
+            console.log($obj3);
+            //属性过滤器[attribute^=value]    属性以什么开头
+            //属性过滤器[attribute$=value]    属性以什么结尾
+            //属性过滤器[attribute*=value]    属性包含value值
+        });
+    </script>
+</head>
+<body>
+    <h1>登录</h1>
+    用户名: <input type="text" name="username"> <br>
+    密码:   <input type="pwd"  name="pwd"><br>
+    <input type="submit" value="提交">  
+</body>
+</html>

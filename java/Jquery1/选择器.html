@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-1.12.4.min.js"></script>
+    <script>
+        $(function(){
+            //id选择器
+            let $obj1=$("#d1");
+            console.log($obj1);
+            //类选择器
+            let $obj2=$(".c1");
+            console.log($obj2);
+            //元素选择器
+            let $obj3=$("p");
+            console.log($obj3);
+            //组合选择器
+            let $obj4=$("h1,p");
+            console.log($obj4);
+            //层次选择器
+            let $obj5=$("#d2 p");
+            console.log($obj5);
+            //内容过滤器
+            let $obj6=$("div:contains('君不见')")
+            console.log($obj6);
+            //属性过滤器
+            let $obj7=$("p[name='n1']");
+            console.log($obj7);
+            //has选择器
+            let $obj8=$("div:has(span)");
+            console.log($obj8);
+            //parent
+            let $obj9=$("div:parent");
+            console.log($obj9);
+            //层次选择器
+            let $obj10=$(".c1>p");
+            console.log($obj10);
+        });
+    </script>
+</head>
+<body>
+    <h1>将进酒-君不见</h1>
+    <div id="d2">
+        <div id="d1">
+            君不见,黄河之水天上来,奔流到海不复回
+        </div>
+        <div class="c1">
+            <p name="n1">君不见,高堂明镜悲白发,朝如青丝暮成雪</p>
+        </div>
+        <div>
+            <span>人生得意须尽欢,莫使金樽空对月</span>
+        </div>
+    </div>
+    <p>天生我材必有用,千金散尽还复来</p>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            margin: 30px 30px;
+            background-color: pink;
+        }
+
+        .c1 {
+            width: 200px;
+            height: 200px;
+            margin: 50px 50px;
+            background-color: blue;
+        }
+    </style>
+    <script src="./jquery-1.12.4.min.js"></script>
+    <script>
+        $(function () {
+            $("#d1").on({
+                mouseover: function () {
+                    $("#d1").addClass("c1");
+                },
+                mouseout: function () {
+                    $("#d1").removeClass("c1");
+                }
+            },
+                'ul li');
+
+            $("ul li").on('click', function () {
+                alert(1);
+            });
+
+        });
+        function f1() {
+            //$("ul li").off('click');
+            $("#d1").off("mouseover mouseout", "ul li");
+        }
+        function f2() {
+            $('ul li').off();
+        }
+    </script>
+</head>
+
+<body>
+    <div id="d1">
+        <ul>
+            <li>刘邦</li>
+            <li>朱元璋</li>
+            <li>刘备</li>
+        </ul>
+    </div>
+    <div id="d2">
+        <ul>
+            <li>西施</li>
+            <li>貂蝉</li>
+            <li>王昭君</li>
+        </ul>
+
+    </div>
+    <input type="button" value="删除指定事件" onclick="f1()">
+    <input type="button" value="删除全部事件" onclick="f2()">
+</body>
+
+</html>

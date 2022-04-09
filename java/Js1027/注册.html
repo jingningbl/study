@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //校验用户名
+        function f1() {
+            //获取第一个input标签
+            let obj = document.getElementsByTagName("input")[0];
+            //获取输入值
+            let code = obj.value;
+            if (code == "") {
+                //输入为空,在span中显示提示
+                console.log(document.getElementById("notice1").innerHTML = "x 用户名不能为空");
+            } else {
+                console.log(document.getElementById("notice1").innerHTML = "");
+            }
+        }
+        //密码校验
+        function f2() {
+            //获取第二个input标签
+            let obj = document.getElementsByTagName("input")[1];
+            //获取输入值
+            let code = obj.value;
+            if (code == "") {
+                //输入为空,则提示
+                console.log(document.getElementById("notice2").innerHTML = "x 密码不能为空");
+            } else {
+                //输入不为空,则判断长度
+                if (code.length > 6) {
+                    console.log(document.getElementById("notice2").innerHTML = "");
+                } else {
+                    //长度小于6,则提示
+                    console.log(document.getElementById("notice2").innerHTML = "x 密码长度需大于6");
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 校验结果字体颜色 */
+        #notice1 {
+            color: red;
+        }
+
+        #notice2 {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 设置字体大小 -->
+    <p style="font-size: x-large;"><b>注册用户</b><br></p>
+    <!-- 用户名输入框,id为1,span的id为notice1-->
+    用户名: <input type="text" name="" id="1" placeholder="请输入用户名"><span id="notice1"></span><br>
+    <!-- 密码输入框,id为2,span的id为notice2-->
+    密码: <input type="password" name="" id="2" placeholder="请输入密码"><span id="notice2"></span><br><br>
+    <!-- 验证用户名按钮 -->
+    <input type="button" value="验证用户名" onclick="f1()">
+    <!-- 验证密码按钮 -->
+    <input type="button" value="验证密码" onclick="f2()">
+</body>
+
+</html>

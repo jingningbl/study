@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-1.12.4.min.js"></script>
+    <script>
+        $(function () {
+            let $obj1 = $("input[name='username']");
+            //value属性赋值
+            $obj1.val('汤唯');
+            console.log('val:' + $obj1.val());
+            //attr
+            $obj1.attr("type", "button");
+            console.log('attr:' + $obj1.attr('type'));
+            $('#d1').text('不甜不是单身狗');
+            console.log('text:' + $('#d1').text());
+            //html
+            console.log("html:" + $("#d2").html());
+            $("input[name='username']").attr("type", "text").attr('name', "myname");
+            //创建节点
+            let $obj3 = $("<p>朝飞暮卷2,云霞翠轩2</p>");
+            $("#d2").html($obj3);
+            //$("#d2").html("直接写标签内容")
+        });
+    </script>
+</head>
+
+<body>
+    <input type="text" name="username">
+    <p id="d1">落花有意流水无情</p>
+    <div id="d2">
+        <p>朝飞暮卷,云霞翠轩</p>
+    </div>
+</body>
+
+</html>

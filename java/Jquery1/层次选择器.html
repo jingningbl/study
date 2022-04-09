@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-1.12.4.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            //祖先  后代
+            let $obj1=$('#d1 p');
+            console.log($obj1);
+            //父元素 子代
+            let $obj2=$('div>p');
+            console.log($obj2);
+            //紧跟着当前的下一个
+            let $obj3=$('#d2+p');
+            console.log($obj3);
+            //当前后面的所有元素对象
+            let $obj4=$('#d2~p');
+            console.log($obj4);
+        });
+    </script>
+</head>
+<body>
+    <div id="d1">
+        <div id="d2">
+            <p>醉后不知天在水,满船清梦压星河</p>
+        </div>
+        <p>海上生明月,天涯共此时</p>
+        <h1>何当共剪西窗烛,却话巴山夜雨时</h1>
+        <p>原来姹紫嫣红开遍,似这般都赋予断尽颓垣</p>
+    </div>
+    <p>锄禾日当午,汗滴禾下土</p>
+</body>
+</html>

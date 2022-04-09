@@ -1,0 +1,25 @@
+创建虚拟环境
+python -m venv  venv
+激活虚拟环境
+venv\Scripts\activate
+安装库
+pip install Django
+创建项目
+Django-admin startproject mystore
+cd mystore
+启动项目
+python manage.py runserver
+查看库
+pip freeze
+追加到文件
+pip freeze > requirements.txt
+删除虚拟环境venv,发送其他机器
+创建虚拟环境
+python -m venv  venv
+激活虚拟环境
+venv\Scripts\activate
+cd mystore
+安装记录在requirements.txt中的库
+pip install -r requirements.txt
+启动项目
+python manage.py runserver

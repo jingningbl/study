@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .c1 {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+    </style>
+    <script src="./jquery-1.12.4.min.js"></script>
+    <script>
+        function f1() {
+            $('div').toggleClass("c1");
+        }
+        function f2() {
+            //类似原生dom的style属性
+            $('div').css({ 'width': '300px', 'backgroundColor': 'red' });
+        }
+        function f3() {
+            //$("#d2").siblings().css({'color':'red','fontSize':'20pt'});
+            $("#d1").children().css({ 'color': 'red', 'fontSize': '20pt' });
+            console.log($("#d1").children());
+        }
+    </script>
+</head>
+
+<body>
+    <div class="c1">
+
+    </div>
+    <div id="d1">
+        <p>1111</p>
+        <p>2222</p>
+        <p id="d2">3333</p>
+        <p>4444</p>
+        <p>5555</p>
+    </div>
+
+
+    <input type="button" value="toggle测试" onclick="f1()">
+    <input type="button" value="css方式测试" onclick="f2()">
+    <input type="button" value="silibings方式测试" onclick="f3()">
+</body>
+
+</html>

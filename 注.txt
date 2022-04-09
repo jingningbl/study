@@ -1,0 +1,2 @@
+Alt+Shift+A:注释
+Alt+Shift+F:代码格式化

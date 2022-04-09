@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-1.12.4.min.js"></script>
+    <script>
+        $(function(){
+            //点击d1添加给d2动态添加子元素
+            $("#d1").click(function(){
+                $("#d2").append("<ul id='d3'></ul>")
+                $("#d2 ul").append("<li>虚足</li>");
+                $("#d2 ul").append("<li>段誉</li>");
+                $("#d2 ul").append("<li>乔峰</li>");
+            });
+            //普通的绑定
+            // $("ul li").click(function(){
+            //     console.log(1);
+            // });
+            //on
+            $("#d2").on('click','ul li',function(){
+                console.log(2);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="d2">
+
+    </div>
+    <input type="button" value="点击添加" id="d1">
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //函数
+        window.onload = function () {
+            //获取id的值
+            var obj = document.getElementById("1");
+            //将id赋值给code,作为定时器的时间
+            var code = obj.value;
+            //设置间隔定时器.间隔时间1秒
+            setInterval(() => {
+                //时间为0,回退上一页
+                if (code > 0) {
+                    //时间减一
+                    code--;
+                    obj.value = code;
+                } else if (code == 0) {
+                    location.href = "首页.html";
+                }
+            }, 1000)
+        }
+    </script>
+</head>
+
+<body>
+    欢迎进入当前页面<br>
+    <!-- 按钮 -->
+    <input type="button" value="3" id="1">
+    秒后返回上一页
+    <span style="color: red; font-size: 15pt;">123</span>
+
+</body>
+
+</html>
