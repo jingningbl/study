@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+    <script src="./1.js"></script>
+</head>
+<body>
+<h1>注册</h1>
+<form action="findUsername" onsubmit="return f1()">
+    用户名:<input type="text" name="username" id="username" onblur="checkUsername()">
+    <span id="err-username"></span><br>
+    密码:<input type="password" name="pwd"> <br>
+    验证码:<img src="showImage" id="myimg" onclick="changeImage()">
+    <a href="#" onclick="changeImage()">看不清楚,换一张</a>
+    <input name="code" id="code" onblur="checkCode()">
+    <span id="err-code"></span><br>
+    <input type="reset" value="重置"> <input type="submit" value="注册"> <br>
+</form>
+</body>
+</html>

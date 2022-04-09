@@ -1,0 +1,8 @@
+一.包的设计
+    com.ruandy
+        -util :工具类,包含数据库工具类,验证码工具类
+        -pojo: 封装的基础映射对象
+        -dao : 数据库接口                 --具体的处理        模型层-M
+        -controller : 服务和前端交互的控制层--参数获取和响应    控制层-C
+          SongDao songDao=new SongDaoImpl()
+        -service : 通过参数访问具体的dao接口--参数处理业务
