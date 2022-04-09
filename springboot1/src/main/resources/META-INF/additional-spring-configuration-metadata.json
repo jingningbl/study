@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "bai.name",
+      "type": "java.lang.String",
+      "description": "Description for bai.username."
+    }
+  ] }

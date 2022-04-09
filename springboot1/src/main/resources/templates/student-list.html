@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+学生列表thymeleaf
+<div th:each="item:${stuList}">
+    <h4 th:text="${item.id}"></h4>
+    <h4 th:text="${item.name}"></h4>
+</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot1.dao.TeachInfoDao">
+
+    <resultMap type="com.springboot1.entity.TeachInfo" id="TeachInfoMap">
+        <result property="tid" column="tid" jdbcType="INTEGER"/>
+        <result property="tname" column="tname" jdbcType="VARCHAR"/>
+        <result property="age" column="age" jdbcType="VARCHAR"/>
+        <result property="course" column="course" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TeachInfoMap">
+        select
+          tid, tname, age, course
+        from spring.teach_info
+        where tid = #{tid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TeachInfoMap">
+        select
+          tid, tname, age, course
+        from spring.teach_info
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="TeachInfoMap">
+        select
+          tid, tname, age, course
+        from spring.teach_info
+        <where>
+            <if test="tid != null">
+                and tid = #{tid}
+            </if>
+            <if test="tname != null and tname != ''">
+                and tname = #{tname}
+            </if>
+            <if test="age != null and age != ''">
+                and age = #{age}
+            </if>
+            <if test="course != null and course != ''">
+                and course = #{course}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="tid" useGeneratedKeys="true">
+        insert into spring.teach_info(tname, age, course)
+        values (#{tname}, #{age}, #{course})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="tid" useGeneratedKeys="true">
+        insert into spring.teach_info(tname, age, course)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.tname}, #{entity.age}, #{entity.course})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="tid" useGeneratedKeys="true">
+        insert into spring.teach_info(tname, age, course)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.tname}, #{entity.age}, #{entity.course})
+        </foreach>
+        on duplicate key update
+         tname = values(tname) , age = values(age) , course = values(course)     </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update spring.teach_info
+        <set>
+            <if test="tname != null and tname != ''">
+                tname = #{tname},
+            </if>
+            <if test="age != null and age != ''">
+                age = #{age},
+            </if>
+            <if test="course != null and course != ''">
+                course = #{course},
+            </if>
+        </set>
+        where tid = #{tid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from spring.teach_info where tid = #{tid}
+    </delete>
+
+</mapper>
+

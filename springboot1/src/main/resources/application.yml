@@ -1,0 +1,39 @@
+########### logback日志配置 ##########
+# yml语法注意:1.缩进 2.(:)后面一定要空格
+#server:
+#  port: 8081
+#  servlet:
+#    #路径必须以/打头
+#    context-path: /springboot
+###########################
+##自定义配置
+bai:
+  name: muzi
+  outlook: handsome
+  age: ${server.port}
+
+#spring:
+#  freemarker:
+#    #springboot默认的freemarker的后缀为.ftlh,模板引擎文件默认放在templates下
+#    suffix: .ftl
+#切换使用的配置文件,不用写前缀
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false
+    username: root
+    password: 1513
+    #在引入druid依赖后就可用,为了规范配置type
+    type: com.alibaba.druid.pool.DruidDataSource
+mybatis:
+  #mybatis扫描映射文件
+  mapper-locations: classpath:/mappers/*.xml
+  #mybatis扫描配置文件
+  #config-location:
+  configuration:
+    #下划线转驼峰
+    map-underscore-to-camel-case: true
+  #设置别名
+  #type-aliases-package:

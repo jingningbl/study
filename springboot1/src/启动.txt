@@ -1,0 +1,9 @@
+打包部署
+
+jar:
+java -jar jar包
+
+war:
+排除springboot内部tomcat依赖
+继承SpringBootServletInitializer,重写configure
+更改打包方式
