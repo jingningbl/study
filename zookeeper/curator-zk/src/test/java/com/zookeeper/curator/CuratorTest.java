@@ -10,9 +10,7 @@ import org.apache.zookeeper.data.Stat;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 /**
  * @author bai
