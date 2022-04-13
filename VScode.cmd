@@ -1,6 +1,6 @@
 @each off
 D:
-cd D:\VScode\study
+cd D:\vscode\vscode
 git checkout -b vscode
 git add .
 git commit -m vscode
