@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://www.ehcache.org/ehcache.xsd"
+         updateCheck="false">
+<!-- ehcache.xsd:http://www.ehcache.org/ehcache.xsd   -->
+    <diskStore path="D:\IDEA\Maven\mybatis\mybatis6\src\ehcache"/>
+    <defaultCache
+            maxElementsInMemory="1"
+            maxElementsOnDisk="10000000"
+            eternal="false"
+            overflowToDisk="true"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU">
+    </defaultCache>
+</ehcache>

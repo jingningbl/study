@@ -1,0 +1,3 @@
+ApplicationContext context=new ClassPathXmlApplicationContext("classpath:applicationContext5.xml");
+中参数为多个,则后加载的覆盖前面的,以后面的配置文件为准
+setter注入可以解决循环依赖

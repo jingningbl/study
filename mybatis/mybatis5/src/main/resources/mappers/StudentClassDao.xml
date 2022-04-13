@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.dao.StudentClassDao">
+
+    <resultMap type="com.mybatis.entity.StudentClass" id="StudentClassMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="classId" column="class_id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="StudentClassMap">
+        select id,
+               class_id,
+               name
+        from mybatis.student_class
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="StudentClassMap">
+        select id,
+               class_id,
+               name
+        from mybatis.student_class
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="StudentClassMap">
+        select
+        id, class_id, name
+        from mybatis.student_class
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="classId != null">
+                and class_id = #{classId}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into mybatis.student_class(class_id, name)
+        values (#{classId}, #{name})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into mybatis.student_class(class_id, name)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.classId}, #{entity.name})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into mybatis.student_class(class_id, name)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.classId}, #{entity.name})
+        </foreach>
+        on duplicate key update
+        class_id = values(class_id) , name = values(name)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update mybatis.student_class
+        <set>
+            <if test="classId != null">
+                class_id = #{classId},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from mybatis.student_class
+        where id = #{id}
+    </delete>
+
+    <select id="selectClassByClassId" resultMap="StudentClassMap">
+        select id, class_id, name
+        from mybatis.student_class
+        where class_id = #{classId}
+    </select>
+
+    <resultMap type="com.mybatis.dto.OneManyDto" id="StudentClassResultMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="classId" column="class_id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <collection property="studentList" column="class_id" javaType="list" ofType="Student"
+                    select="com.mybatis.dao.StudentDao.selectStudentListByClassId" fetchType="lazy"/>
+    </resultMap>
+    <select id="selectStudentFromClassByClassId" resultMap="StudentClassResultMap">
+        select id, class_id, name
+        from mybatis.student_class
+        where id = #{id}
+    </select>
+</mapper>
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis6.dao.StudentDao1">
+<!--    分布式缓存-->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+    <resultMap type="com.mybatis6.entity.Student" id="StudentMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="age" column="age" jdbcType="INTEGER"/>
+        <result property="classId" column="class_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="StudentMap">
+        select id,
+               name,
+               age,
+               class_id
+        from mybatis.student
+        where id = #{id}
+    </select>
+</mapper>
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Spring容器可以当成豌豆荚,里面装的豌豆(beans)-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 在容器中声明一个Bean id是当前bean在容器中的唯一标志 class代表Bean的类型,
+    在底层中通过反射被调用 -->
+<!--   对于property标签的bean,spring容器不会管理销毁,即无法使用自定义销毁 -->
+    <bean id="yuanyuan" class="com.pojo.Woman" init-method="myInit" destroy-method="myDestroy" lazy-init="false">
+        <property name="name" value="媛媛"/>
+        <property name="age" value="18"/>
+        <property name="outlook" value="花容月貌的"/>
+    </bean>
+    <bean id="lulu" class="com.pojo.Man" scope="prototype">
+        <property name="name" value="陆陆"/>
+        <property name="fund" value="身无分文的"/>
+        <property name="woman" ref="yuanyuan"/>
+    </bean>
+</beans>

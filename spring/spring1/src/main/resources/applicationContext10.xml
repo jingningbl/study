@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Spring容器可以当成豌豆荚,里面装的豌豆(beans)-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 在容器中声明一个Bean id是当前bean在容器中的唯一标志 class代表Bean的类型,
+    在底层中通过反射被调用 -->
+    <bean id="male" class="com.pojo.Male"/>
+    <bean id="lookUpTest" class="com.pojo.LookUpTest">
+        <lookup-method name="getPeople" bean="male"/>
+    </bean>
+</beans>

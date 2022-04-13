@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace代表命名空间,全局(Mybatis环境)唯一,必须指定-->
+<mapper namespace="student">
+    <!--    jvm判断对象是否存活:1.引用计数法 2.可达性分析(引用链法)
+            对象引用级别:
+                1.强引用:new 对象
+                2.软引用(SoftReference)
+                3.弱引用(WeakReference)
+                4.虚引用
+    -->
+    <!--    启用二级缓存
+            1.eviction配置缓存的淘汰/回收策略,缓存数量达到最大值,触发回收策略
+                LRU(Least Recently Used):最近最少使用淘汰
+                FIFO(First In First Out):先进先出,类似队列
+                SOFT:GC对软引用的回收策略
+                WEAK:GC对弱引用的回收策略
+            2.size缓存对象的最大数量,默认1024;缓存对象如果是列表,也只占用一个位置
+            3.flushInterval:刷新间隔,默认不刷新(清空缓存),单位ms
+            4.readOnly:是否只读
+                默认false:可读可写,缓存的对象所属类需要实现序列化接口,因为命中缓存之后实际拿到的缓存对象,并不是内存中的对象,而是她的克隆对象,
+                因为克隆操作需要序列化操作,涉及序列化操作,效率低
+                true:只读,拿到的缓存对象是内存中的对象,不安全
+    -->
+    <cache eviction="LRU" size="1024" flushInterval="60000" readOnly="false"/>
+    <!--    基本字段-->
+    <!--    id是当前namespace下唯一的标志-->
+    <sql id="BASE_COLUMN">id,name,address</sql>
+    <select id="queryById" resultType="student" parameterType="int">
+        select
+        <include refid="BASE_COLUMN"/>
+        from student where id = #{id}
+    </select>
+    <!-- resultType类型为集合,应该包含集合的类型 useCache是否会二级缓存 flushCache刷新缓存 -->
+    <select id="queryAll" resultType="student" useCache="false" flushCache="true">
+        select
+        <include refid="BASE_COLUMN"/>
+        from student
+    </select>
+    <select id="selectBetween" resultType="student">
+        select
+        <include refid="BASE_COLUMN"/>
+        from student where id between #{min} and #{max}
+    </select>
+    <select id="selectBetween2" resultType="student" parameterType="com.mybatis.dto.BetweenDto">
+        select
+        <include refid="BASE_COLUMN"/>
+        from student where id between #{min} and #{max}
+    </select>
+    <insert id="insertStudent" parameterType="com.mybatis.pojo.Student">
+        insert into student(name, address)
+        values (#{name}, #{address})
+    </insert>
+    <update id="updateById" parameterType="com.mybatis.pojo.Student">
+        update student
+        set name=#{name},
+            address=#{address}
+        where id = #{id}
+    </update>
+    <delete id="deleteById" parameterType="int">
+        delete
+        from student
+        where id = #{id}
+    </delete>
+    <insert id="insertStudentReturnId" parameterType="com.mybatis.pojo.Student">
+        <!--selectKey子查询,keyProperty(类中映射的字段名)和keyColumn(表中的字段名)映射,order表示该语句在外层语句执行之前/后执行-->
+        <selectKey keyProperty="id" keyColumn="id" resultType="int" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into student(name, address) values (#{name},#{address})
+    </insert>
+    <insert id="insertStudentReturnId2" parameterType="com.mybatis.pojo.Student"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into student(name, address)
+        values (#{name}, #{address})
+    </insert>
+    <!--where可以去除多余的and,不能添加缺少的and-->
+    <select id="queryDynamic1" parameterType="com.mybatis.pojo.Student" resultType="student">
+        select
+        <include refid="BASE_COLUMN"/>
+        from student
+        <where>
+            <if test="name!=null and name!=''">
+                and name like concat('%',#{name},'%')
+            </if>
+            <if test="address!=null and address!=''">
+                and address like concat('%',#{address},'%')
+            </if>
+        </where>
+    </select>
+    <!--    set可以去除多余的逗号,不可添加缺少的-->
+    <update id="updateByIdDynamic" parameterType="com.mybatis.pojo.Student">
+        update student
+        <set>
+            <if test="name!=null and name!=''">
+                name=#{name},
+            </if>
+            <if test="address!=null and address!=''">
+                address=#{address}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <!-- 只会进入when中的一个分支-->
+    <select id="queryDynamic2" parameterType="com.mybatis.pojo.Student" resultType="student">
+        select
+        <include refid="BASE_COLUMN"/>
+        from student
+        <where>
+            <choose>
+                <when test="name!=null and name!=''">
+                    name like concat('%',#{name},'%')
+                </when>
+                <when test="address!=null and address!=''">
+                    address like concat('%',#{address},'%')
+                </when>
+                <otherwise>
+                    id=1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+    <insert id="batchInsertStudent" parameterType="list">
+        insert into student(name, address) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.name},#{item.address})
+        </foreach>
+    </insert>
+    <select id="selectByArray" parameterType="list" resultType="student">
+        select
+        <include refid="BASE_COLUMN"/>
+        from student
+        <where>
+            <foreach collection="array" item="item" index="index" separator="," open="id in (" close=")">
+                #{item}
+            </foreach>
+        </where>
+    </select>
+    <select id="selectByArray2" parameterType="list" resultType="student">
+        select
+        <include refid="BASE_COLUMN"/>
+        from student where id in (
+        <foreach collection="array" item="item" index="index" separator=",">#{item}
+        </foreach>
+        )
+    </select>
+    <!--    collection为map集合中对应的key-->
+    <select id="selectByMap" parameterType="map" resultType="student">
+        select
+        <include refid="BASE_COLUMN"/>
+        from student
+        <where>
+            <foreach collection="xxx" item="item" index="index" separator="," open="id in (" close=")">
+                #{item}
+            </foreach>
+        </where>
+        or
+        <foreach collection="yyy" item="item" index="index" separator="," open="id in (" close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="selectByDto" parameterType="com.mybatis.dto.BatchDto" resultType="student">
+        select
+        <include refid="BASE_COLUMN"/>
+        from student
+        <where>
+            <foreach collection="aaa" item="item" index="index" separator="," open="id in (" close=")">
+                #{item}
+            </foreach>
+        </where>
+    </select>
+    <!--    改版之后,可以只写主要的映射-->
+    <resultMap id="studentResultMap" type="com.mybatis.dto.ManyToOneDto">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="address" column="address"/>
+        <result property="courseId" column="course_id"/>
+        <association property="course" javaType="course">
+            <result property="courseId" column="course_id"/>
+            <result property="courseName" column="course_name"/>
+        </association>
+    </resultMap>
+    <select id="selectManyToOne1" resultMap="studentResultMap">
+        select s.id, s.name, s.address, s.course_id, c.course_name
+        from spring.student s
+                 left join spring.course c on s.course_id = c.course_id
+        where s.id = #{id}
+    </select>
+    <!--   级联查询-->
+    <resultMap id="studentResultMap2" type="com.mybatis.dto.ManyToOneDto">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="address" column="address"/>
+        <result property="courseId" column="course_id"/>
+        <association property="course" column="course_id" javaType="course"
+                     select="com.mybatis.dao.CourseDao.queryById"/>
+    </resultMap>
+    <select id="selectManyToOne2" resultMap="studentResultMap2">
+        select *
+        from student
+        where id = #{id}
+    </select>
+    <select id="selectByCourseId" resultType="Student">
+        select *
+        from student
+        where course_id = #{course_id}
+    </select>
+</mapper>

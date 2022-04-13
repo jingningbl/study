@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
+<!--    加载外部配置文件,多个可以使用通配符-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+<!--    <context:property-placeholder location="classpath:redis.properties"/>-->
+<!--    只会让容器注册和注解开发相关的几个Bean,缺少扫描步骤-->
+<!--    <context:annotation-config/>-->
+<!--    此标签与上个功能相同,可以扫描-->
+    <context:component-scan base-package="com"/>
+
+<!--    <bean id="lulu" class="com.pojo.Male">-->
+<!--        <property name="name" value="lulu"/>-->
+<!--    </bean>-->
+<!--    <bean id="yuanyuan" class="com.pojo.Female">-->
+<!--        <property name="name" value="yuanyuan"/>-->
+<!--    </bean>-->
+</beans>

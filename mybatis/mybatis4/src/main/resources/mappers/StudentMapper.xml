@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="student">
+<!--    启用二级缓存-->
+    <cache eviction="LRU" size="1024" flushInterval="60000" readOnly="false"/>
+    <sql id="BASE_COLUMN">id,name,address</sql>
+    <select id="findStudent" parameterType="student" resultType="student">
+        select
+        <include refid="BASE_COLUMN"/>
+        from student3
+        <where>
+            <if test="name!=null and name!=''">
+                and name like concat('%',#{name},'%')
+            </if>
+        </where>
+    </select>
+    <select id="findStudent2" resultType="student" parameterType="student">
+        select
+        <include refid="BASE_COLUMN"/>
+        from student3
+        <where>
+            <choose>
+                <when test="name!=null and name!=''">
+                    name like concat('%',#{name},'%')
+                </when>
+                <when test="address!=null and address!=''">
+                    address like concat('%',#{address},'%')
+                </when>
+                <otherwise>
+                    id=1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+    <update id="updateStudent" parameterType="student">
+        update student3
+        <set>
+            <if test="name!=null and name!=''">
+                name = #{name},
+            </if>
+            <if test="address!=null and address!=''">
+                address = #{address}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <select id="findStudentByForEach" resultType="student">
+        select * from student3 where id in
+        <foreach collection="list" item="id" index="index" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+    <select id="findStudentByBind" parameterType="student" resultType="student">
+        select * from student3 where
+        <bind name="name_pattern" value="'%'+name+'%'"/>
+        <if test="name_pattern!=null and name_pattern!=''">
+            name like #{name_pattern}
+        </if>
+    </select>
+</mapper>

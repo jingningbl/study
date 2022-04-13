@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Spring容器可以当成豌豆荚,里面装的豌豆(beans)-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--    循环依赖-->
+    <bean id="dependencyA" class="com.circular.DependencyA">
+        <property name="dependencyB" ref="dependencyB"/>
+    </bean>
+    <bean id="dependencyB" class="com.circular.DependencyB">
+        <property name="dependencyA" ref="dependencyA"/>
+    </bean>
+</beans>

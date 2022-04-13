@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 标签配置有顺序-->
+    <properties resource="jdbc.properties"/>
+    <settings>
+        <!-- 是否开启下划线转驼峰命名方式的自动转换-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <typeAliases>
+        <package name="com.mybatis.pojo"/>
+        <!--        alias自定义别名,不加为默认别名student-->
+        <!--        <typeAlias type="com.mybatis.pojo.Student" alias="li"/>-->
+    </typeAliases>
+    <!--    mybatis分页插件-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!--            指定数据库-->
+            <property name="helperDialect" value="mysql"/>
+            <!--            设置小于0页,则查询第一页;大于最大页,查询最后一页-->
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
+    <environments default="druid">
+        <environment id="mysql">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+            <!--            c3p0连接池-->
+            <!--            <dataSource type="com.mybatis.datasource.C3P0DataSourceFactory">-->
+            <!--                <property name="driverClass" value="${driver}"/>-->
+            <!--                <property name="jdbcUrl" value="${url}"/>-->
+            <!--                <property name="user" value="${username}"/>-->
+            <!--                <property name="password" value="${password}"/>-->
+            <!--            </dataSource>-->
+            <!--            阿里巴巴数据源-->
+            <!--            <dataSource type="com.mybatis.datasource.DruidDataSourceFactory">-->
+            <!--                <property name="url" value="${url}"/>-->
+            <!--                <property name="username" value="${username}"/>-->
+            <!--                <property name="password" value="${password}"/>-->
+            <!--            </dataSource>-->
+        </environment>
+        <environment id="druid">
+            <transactionManager type="JDBC"/>
+            <!--            阿里巴巴数据源-->
+            <dataSource type="com.mybatis.datasource.DruidDataSourceFactory">
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--        注册映射文件-->
+        <mapper resource="mappers/StudentDao.xml"/>
+        <mapper resource="mappers/StudentDao2.xml"/>
+        <mapper resource="mappers/StudentDao3.xml"/>
+        <mapper resource="mappers/CourseDao.xml"/>
+    </mappers>
+</configuration>

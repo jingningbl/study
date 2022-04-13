@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.dao.StudentDao">
+
+    <resultMap type="com.mybatis.entity.Student" id="StudentMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="age" column="age" jdbcType="INTEGER"/>
+        <result property="classId" column="class_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="StudentMap">
+        select id,
+               name,
+               age,
+               class_id
+        from mybatis.student
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="StudentMap">
+        select id,
+               name,
+               age,
+               class_id
+        from mybatis.student
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="StudentMap">
+        select
+        id, name, age, class_id
+        from mybatis.student
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="age != null">
+                and age = #{age}
+            </if>
+            <if test="classId != null">
+                and class_id = #{classId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into mybatis.student(name, age, class_id)
+        values (#{name}, #{age}, #{classId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into mybatis.student(name, age, class_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.name}, #{entity.age}, #{entity.classId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into mybatis.student(name, age, class_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.name}, #{entity.age}, #{entity.classId})
+        </foreach>
+        on duplicate key update
+        name = values(name) , age = values(age) , class_id = values(class_id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update mybatis.student
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="age != null">
+                age = #{age},
+            </if>
+            <if test="classId != null">
+                class_id = #{classId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from mybatis.student
+        where id = #{id}
+    </delete>
+
+    <resultMap type="com.mybatis.dto.ManyOneDto" id="StudentResultMap">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="age" column="age" jdbcType="INTEGER"/>
+        <result property="classId" column="class_id" jdbcType="INTEGER"/>
+        <association property="studentClass" column="class_id" javaType="StudentClass"
+                     select="com.mybatis.dao.StudentClassDao.selectClassByClassId"/>
+    </resultMap>
+    <!--    查询学生信息及其所属班级-->
+    <select id="selectStudentById" resultMap="StudentResultMap">
+        select id,
+               name,
+               age,
+               class_id
+        from mybatis.student
+        where id = #{id}
+    </select>
+
+    <select id="selectStudentListByClassId" resultMap="StudentMap">
+        select *
+        from student
+        where class_id = #{classId}
+    </select>
+</mapper>
+

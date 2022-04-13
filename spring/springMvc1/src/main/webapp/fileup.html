@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文件上传</title>
+</head>
+<body>
+<!--enctype="multipart/form-data支持文件上传-->
+<form action="/firstUpload/upload" method="post" enctype="multipart/form-data">
+    选择文件:<input type="file" name="file"><br>
+    <input type="submit" value="点我上传">
+</form>
+</body>
+</html>

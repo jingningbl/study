@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace代表命名空间,全局(Mybatis环境)唯一,必须指定-->
+<mapper namespace="student2">
+    <!--    基本字段-->
+    <!--    id是当前namespace下唯一的标志-->
+    <sql id="BASE_COLUMN">id,name,address,my_birthday</sql>
+    <select id="queryById" resultType="student2" parameterType="int">
+        select
+        <include refid="BASE_COLUMN"/>
+        from student
+        where id = #{id}
+    </select>
+    <!-- resultType类型为集合,应该包含集合的类型   -->
+    <select id="queryAll" resultType="student2">
+        select
+        <include refid="BASE_COLUMN"/>
+        from student
+    </select>
+    <select id="selectBetween" resultType="student2">
+        select
+        <include refid="BASE_COLUMN"/>
+        from student
+        where id between #{min} and #{max}
+    </select>
+    <select id="selectBetween2" resultType="student2" parameterType="com.mybatis.dto.BetweenDto">
+        select
+        <include refid="BASE_COLUMN"/>
+        from student
+        where id between #{min} and #{max}
+    </select>
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Spring容器可以当成豌豆荚,里面装的豌豆(beans)-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 在容器中声明一个Bean id是当前bean在容器中的唯一标志 class代表Bean的类型,
+    在底层中通过反射被调用 -->
+    <bean id="yuanyuan" class="com.pojo.Woman" init-method="myInit">
+        <!-- 将属性值根据名字匹配后,注入到对象中   -->
+        <property name="name" value="媛媛"/>
+        <property name="age" value="18"/>
+        <property name="outlook" value="花容月貌的"/>
+    </bean>
+    <bean id="lulu" class="com.pojo.Man">
+        <property name="name" value="陆陆"/>
+        <property name="fund" value="身无分文的"/>
+        <!-- 如果注入Straight Values(基本类型,String,等等),通过value注入   -->
+        <!-- 如果是对容器中其他的Bean做引用的话,则使用ref(reference) -->
+        <property name="woman" ref="yuanyuan"/>
+    </bean>
+    <bean class="com.pojo.TestBeanPost"/>
+</beans>

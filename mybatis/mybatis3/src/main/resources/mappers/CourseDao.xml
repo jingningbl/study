@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.dao.CourseDao">
+
+    <resultMap type="com.mybatis.pojo.Course" id="CourseMap">
+        <result property="courseId" column="course_id" jdbcType="INTEGER"/>
+        <result property="courseName" column="course_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="CourseMap">
+        select course_id,
+               course_name
+        from spring.course
+        where course_id = #{courseId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="CourseMap">
+        select course_id,
+               course_name
+        from spring.course
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="CourseMap">
+        select
+        course_id, course_name
+        from spring.course
+        <where>
+            <if test="courseId != null">
+                and course_id = #{courseId}
+            </if>
+            <if test="courseName != null and courseName != ''">
+                and course_name = #{courseName}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="courseId" useGeneratedKeys="true">
+        insert into spring.course(course_name)
+        values (#{courseName})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="courseId" useGeneratedKeys="true">
+        insert into spring.course(course_name)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.courseName})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="courseId" useGeneratedKeys="true">
+        insert into spring.course(course_name)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.courseName})
+        </foreach>
+        on duplicate key update
+        course_name = values(course_name)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update spring.course
+        <set>
+            <if test="courseName != null and courseName != ''">
+                course_name = #{courseName},
+            </if>
+        </set>
+        where course_id = #{courseId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from spring.course
+        where course_id = #{courseId}
+    </delete>
+<!--ofType是list集合的泛型,  fetchType="lazy"不会立刻执行,需要手动调用-->
+    <resultMap type="com.mybatis.dto.OneToManyDto" id="CourseResultMap">
+        <result property="courseId" column="course_id" jdbcType="INTEGER"/>
+        <result property="courseName" column="course_name" jdbcType="VARCHAR"/>
+        <collection property="studentList" javaType="list" ofType="Student"
+                    column="course_id" select="student.selectByCourseId" fetchType="lazy"/>
+    </resultMap>
+    <select id="selectOneToMany" resultMap="CourseResultMap">
+        select course_id,
+               course_name
+        from spring.course
+        where course_id = #{courseId}
+    </select>
+</mapper>
+

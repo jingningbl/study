@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--    扫描包-->
+    <context:component-scan base-package="com"/>
+    <!--    AOP配置-->
+    <!--    <aop:config>-->
+    <!--&lt;!&ndash;   切点:* com.service..*.*(..) 通用的切点表达式,用来匹配方法签名&ndash;&gt;-->
+    <!--&lt;!&ndash;从左到右依次: *:目标方法返回值的类型 ..:包的通配符,..代表当前包以及任意子包&ndash;&gt;-->
+    <!--&lt;!&ndash;        *:类名通配符&ndash;&gt;-->
+    <!--&lt;!&ndash;        *:目标方法通配符&ndash;&gt;-->
+    <!--&lt;!&ndash;        ..:参数通配符,..:代表任意类型的任意参数&ndash;&gt;-->
+    <!--        <aop:pointcut id="firstPC" expression="execution(* com.service..*.*(..))"/>-->
+    <!--        <aop:aspect ref="myAspect">-->
+    <!--&lt;!&ndash;           通知的定义和织入&ndash;&gt;-->
+    <!--&lt;!&ndash;            <aop:before method="myEnhance" pointcut-ref="firstPC"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;            <aop:after method="afterReturningAdvice" pointcut-ref="firstPC"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;            <aop:after-returning method="afterReturningAdvice" pointcut-ref="firstPC" returning="result"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;            相当于finally,放在后面一般,具体以声明顺序为准&ndash;&gt;-->
+    <!--&lt;!&ndash;            <aop:after method="afterAdvice" pointcut-ref="firstPC"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;            返回后通知和异常通知作用在同一个目标方法是互斥的&ndash;&gt;-->
+    <!--            <aop:around method="aroundAdvice" pointcut-ref="firstPC"/>-->
+    <!--        </aop:aspect>-->
+    <!--    </aop:config>-->
+    <aop:aspectj-autoproxy/>
+</beans>

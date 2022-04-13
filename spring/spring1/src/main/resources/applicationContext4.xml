@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Spring容器可以当成豌豆荚,里面装的豌豆(beans)-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 在容器中声明一个Bean id是当前bean在容器中的唯一标志 class代表Bean的类型,
+    在底层中通过反射被调用 -->
+    <!--    工厂实例方法-->
+    <bean id="womanFactory" class="com.factory.WomanFactory"/>
+    <bean id="yuanyuan" factory-bean="womanFactory" factory-method="selectWoman">
+        <constructor-arg name="name" value="媛媛"/>
+        <constructor-arg name="age" value="18"/>
+        <constructor-arg name="outlook" value="肤白貌美的"/>
+    </bean>
+</beans>

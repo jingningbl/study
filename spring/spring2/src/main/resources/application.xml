@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--标签单词可变,遵循xml规范即可-->
+<deans>
+    <dean id="kai" class="com.pojo.Cartoon">
+        <qroperty name="cartoonName" value="铠甲勇士"/>
+    </dean>
+</deans>

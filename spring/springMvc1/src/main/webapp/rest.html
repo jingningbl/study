@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学习Restful</title>
+  <script src="/static/js/jquery-3.6.0.js"></script>
+  <script>
+    $(function (){
+      $('#do-get').click(function () {
+          $.ajax({
+              url:"/restful/request",
+              type:"GET",
+              //前端希望后端返回的数据类型
+              dataType:"json",
+              data:"username=木子&age=18",
+              success:function (result) {
+                  console.log(result)
+                  $('#rest-response').text(result.username)
+              }
+          })
+      });
+
+        $('#do-post').click(function () {
+            $.ajax({
+                url:"/restful/request",
+                type:"POST",
+                //前端希望后端返回的数据类型
+                dataType:"json",
+                data:"username=木子&age=18",
+                success:function (result) {
+                    console.log(result)
+                    $('#rest-response').text(result.username)
+                }
+            })
+        });
+
+        $('#do-put').click(function () {
+            $.ajax({
+                url:"/restful/request",
+                type:"PUT",
+                //前端希望后端返回的数据类型
+                dataType:"json",
+                data:"username=木子&age=18",
+                success:function (result) {
+                    console.log(result)
+                    $('#rest-response').text(result.username)
+                }
+            })
+        });
+
+        $('#do-delete').click(function () {
+            $.ajax({
+                url:"/restful/request",
+                type:"DELETE",
+                //前端希望后端返回的数据类型
+                dataType:"json",
+                data:"username=木子&age=18",
+                success:function (result) {
+                    console.log(result)
+                    $('#rest-response').text(result.username)
+                }
+            })
+        });
+        $('#do-date').click(function () {
+            $.ajax({
+                url:"/restful/getDate",
+                type:"GET",
+                //前端希望后端返回的数据类型
+                dataType:"json",
+                data:"username=木子&age=18&birthday=2022-03-06 18:56:49",
+                success:function (result) {
+                    console.log(result)
+                    $('#rest-response').text(result.username)
+                }
+            })
+        });
+    })
+  </script>
+</head>
+<body>
+<input type="button" id="do-get" value="GET请求"/>
+<input type="button" id="do-post" value="POST请求"/>
+<input type="button" id="do-put" value="PUT请求"/>
+<input type="button" id="do-delete" value="DELETE请求"/>
+<input type="button" id="do-date" value="DATE请求"/><br>
+<p id="rest-response"></p>
+</body>
+</html>

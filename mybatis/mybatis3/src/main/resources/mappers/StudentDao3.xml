@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace代表命名空间,全局(Mybatis环境)唯一,必须指定-->
+<mapper namespace="student3">
+    <!--    基本字段-->
+    <!--    id是当前namespace下唯一的标志-->
+    <sql id="BASE_COLUMN">id,name,address</sql>
+    <select id="queryById" resultType="student3">
+        select
+        <include refid="BASE_COLUMN"/>
+        from student3 where id = #{id}
+    </select>
+    <!-- resultType类型为集合,应该包含集合的类型   -->
+    <select id="queryAll" resultType="student3">
+        select
+        <include refid="BASE_COLUMN"/>
+        from student
+    </select>
+    <select id="selectBetween" resultType="student3">
+        select
+        <include refid="BASE_COLUMN"/>
+        from student where id between #{min} and #{max}
+    </select>
+    <select id="selectBetween2" resultType="student3" parameterType="com.mybatis.dto.BetweenDto">
+        select
+        <include refid="BASE_COLUMN"/>
+        from student where id between #{min} and #{max}
+    </select>
+    <insert id="insertStudent" parameterType="com.mybatis.pojo.Student3">
+        insert into spring.student(name, address) values (#{name},#{address})
+    </insert>
+    <update id="updateById" parameterType="com.mybatis.pojo.Student3">
+        update spring.student3 set name=#{name},address=#{address} where id=#{id}
+    </update>
+    <delete id="deleteById" parameterType="int">
+        delete from student where id=#{id}
+    </delete>
+    <insert id="insertStudentReturnId" parameterType="com.mybatis.pojo.Student3">
+        <!--selectKey子查询,keyProperty(类中映射的字段名)和keyColumn(表中的字段名)映射,order表示该语句在外层语句执行之前/后执行-->
+        <selectKey keyProperty="id" keyColumn="id" resultType="int" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into spring.student(name, address) values (#{name},#{address})
+    </insert>
+    <insert id="insertStudentReturnId2" parameterType="com.mybatis.pojo.Student3"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into spring.student(name, address) values (#{name},#{address})
+    </insert>
+    <insert id="insertStudentReturnId3" parameterType="com.mybatis.pojo.Student3">
+        <!--selectKey子查询,keyProperty(类中映射的字段名)和keyColumn(表中的字段名)映射,order表示该语句在外层语句执行之前/后执行-->
+        <selectKey keyProperty="id" keyColumn="id" resultType="string" order="BEFORE">
+            SELECT REPLACE(UUID(),'-','')
+        </selectKey>
+        insert into spring.student3(id, name, address) values (#{id},#{name},#{address})
+    </insert>
+</mapper>

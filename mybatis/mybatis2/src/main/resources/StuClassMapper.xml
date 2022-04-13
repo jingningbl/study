@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.pojo.StuClass">
+    <select id="findStuCardByCid" parameterType="integer" resultMap="stuClassResultsMap">
+        select c.*, s.sid, s.sname, s.age, s.course
+        from stu_class c,
+             stu_info s
+        where s.classId = c.cid
+          and c.cid = #{cid}
+    </select>
+    <insert id="addStuClass01" parameterType="stuClass" useGeneratedKeys="true" keyProperty="cid">
+        insert into stu_class(cname, sum)
+        VALUES (#{cname}, #{sum})
+    </insert>
+    <resultMap id="stuClassResultsMap" type="stuClass">
+        <id column="cid" property="cid"/>
+        <result column="cname" property="cname"/>
+        <result column="sum" property="sum"/>
+        <collection property="stuInfoList" ofType="stuInfo">
+            <id column="sid" property="sid"/>
+            <result column="sname" property="sname"/>
+            <result column="age" property="age"/>
+            <result column="course" property="course"/>
+        </collection>
+    </resultMap>
+</mapper>
