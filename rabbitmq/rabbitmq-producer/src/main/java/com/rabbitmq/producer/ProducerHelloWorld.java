@@ -8,6 +8,6 @@ package com.rabbitmq.producer;
  */
 public class ProducerHelloWorld {
     public static void main(String[] args) {
-
+        
     }
 }
