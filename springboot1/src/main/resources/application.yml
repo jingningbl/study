@@ -14,7 +14,7 @@ bai:
 
 #spring:
 #  freemarker:
-#    #springboot默认的freemarker的后缀为.ftlh,模板引擎文件默认放在templates下
+    #springboot默认的freemarker的后缀为.ftlh,模板引擎文件默认放在templates下
 #    suffix: .ftl
 #切换使用的配置文件,不用写前缀
 spring:
@@ -27,6 +27,8 @@ spring:
     password: 1513
     #在引入druid依赖后就可用,为了规范配置type
     type: com.alibaba.druid.pool.DruidDataSource
+#  freemarker:
+#    suffix: .ftl
 mybatis:
   #mybatis扫描映射文件
   mapper-locations: classpath:/mappers/*.xml

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author bai
  * @version V1.0
  * @date 2022/3/30 22:00
- * @describe
+ * @describe 解决跨域问题
  */
 @Configuration
 public class CosConfig {
@@ -21,6 +21,7 @@ public class CosConfig {
                 registry.addMapping("/**")
                         .allowedOrigins("*")
                         .allowedMethods("GET", "POST")
+                        //预检请求结果的缓存时间
                         .maxAge(3600);
             }
         };

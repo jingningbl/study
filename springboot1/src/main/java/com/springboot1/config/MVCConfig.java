@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author bai
  * @version V1.0
  * @date 2022/3/30 22:00
- * @describe
+ * @describe 建造者模式
  */
 @Configuration
 public class MVCConfig implements WebMvcConfigurer {

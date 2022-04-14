@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author q1425
+ */
 @SpringBootApplication
 //exclude设置不需要的自动配置
 //@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
@@ -22,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @MapperScan("com.springboot1.dao")
 //开启定时任务
 @EnableScheduling
-//public class Springboot1Application extends SpringBootServletInitializer {
+/** public class Springboot1Application extends SpringBootServletInitializer { */
 public class Springboot1Application {
 
     @Autowired
