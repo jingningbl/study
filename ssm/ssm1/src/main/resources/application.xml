@@ -88,4 +88,21 @@
     <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>
     <mvc:resources mapping="doc.html" location="classpath:/META-INF/resources/"/>
     <mvc:resources mapping="/webjars/*" location="classpath:/META-INF/resources/webjars"/>
+    <!--
+        跨域请求
+        allowed-origins:请求来源
+        allowed-methods:方法
+        allowed-headers:请求头和响应头
+            Authorization:授权的
+            X-Request-With:ajax异步请求
+        allow-credentials:凭证信息,包括证书跨域
+    -->
+    <mvc:cors>
+        <mvc:mapping path="/**"
+                     allowed-origins="*"
+                     allowed-methods="GET,POST"
+                     allowed-headers="Content-Type,Access-Control-Allow-Headers,Authorization,X-Request-With"
+                     allow-credentials="true"
+        />
+    </mvc:cors>
 </beans>

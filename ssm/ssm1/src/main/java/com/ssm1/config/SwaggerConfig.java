@@ -16,6 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @Package com.ssm1.config
  * @date 2022/3/26 12:28
  * @describe 使用Swagger2快速生成接口文档
+ * 建造者模式
  */
 @Configuration
 //必有,开启Swagger2的功能
@@ -29,7 +30,7 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo())
                 .select()
                 //全部扫描
-//                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.any())
 //                .apis(RequestHandlerSelectors.basePackage("com.ssm1.controller"))
                 .paths(PathSelectors.any())
                 .build();

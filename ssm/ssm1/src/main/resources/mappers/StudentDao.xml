@@ -92,7 +92,7 @@
     <!--    </delete>-->
 
     <select id="queryMyPage" resultType="com.ssm1.entity.Student">
-        select * from student
+        select * from mybatis.student1
         <where>
             ${ew.sqlSegment}
         </where>

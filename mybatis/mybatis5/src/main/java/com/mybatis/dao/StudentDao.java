@@ -83,14 +83,12 @@ public interface StudentDao {
     /**
      * 根据id查询学生信息及其班级信息
      *
-     * @param id
      * @return Student
      */
     ManyOneDto selectStudentById(Integer id);
 
     /**
      * 根据班级id查询所有的学生信息
-     * @param classId
      * @return List<Student>
      */
     List<Student> selectStudentListByClassId(Integer classId);

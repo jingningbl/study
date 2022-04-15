@@ -31,6 +31,7 @@
         <module>ssm/ssm1</module>
         <module>spring/spring6</module>
         <module>spring/spring7</module>
+        <module>spring/spring8</module>
     </modules>
 
     <properties>
