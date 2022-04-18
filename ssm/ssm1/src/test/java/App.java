@@ -1,6 +1,8 @@
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.ssm1.dao.EmployeeDao;
 import com.ssm1.dao.StudentDao;
+import com.ssm1.dto.responseDto.EmployeeDto;
 import com.ssm1.entity.Student;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +26,10 @@ import java.util.List;
 public class App {
 
     @Autowired
-    StudentDao studentDao;
+    private StudentDao studentDao;
+
+    @Autowired
+    private EmployeeDao employeeDao;
 
     //    @Test
 //    public void testDao() {
@@ -50,5 +55,11 @@ public class App {
 //        System.out.println(studentPage.getRecords());
         Page<Student> studentPage = studentDao.queryMyPage(page, wrapper);
         System.out.println(studentPage.getRecords());
+    }
+
+    @Test
+    public void testGetEmInfoByUsernameAndPassword(){
+        EmployeeDto employeeDto = employeeDao.getEmInfoByUsernameAndPassword("123456789", "1513");
+        System.out.println(employeeDto);
     }
 }

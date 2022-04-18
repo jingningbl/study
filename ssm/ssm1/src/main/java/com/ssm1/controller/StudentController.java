@@ -1,7 +1,6 @@
 package com.ssm1.controller;
 
 import com.ssm1.dto.StudentDto;
-import com.ssm1.entity.Student;
 import com.ssm1.entity.TestUser;
 import com.ssm1.service.StudentService;
 import io.swagger.annotations.Api;
@@ -86,6 +85,12 @@ public class StudentController {
         return "hello";
     }
 
+    /**
+     * @return: com.ssm1.entity.TestUser
+     * @author:
+     * @date:
+     * @description:
+     */
     @DeleteMapping("hello")
     public TestUser testHello4() {
         return new TestUser();
