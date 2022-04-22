@@ -1,8 +1,12 @@
 package com.ssm1.dao;
 
+import com.ssm1.dto.requestDto.DepartmentListRequestDto;
+import com.ssm1.dto.responseDto.DepartmentListResponseDto;
 import com.ssm1.entity.Department;
 import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * 部门表(Department)表数据库访问层
@@ -24,7 +28,7 @@ public interface DepartmentDao {
      * 查询指定行数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     List<Department> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
@@ -78,5 +82,19 @@ public interface DepartmentDao {
      */
     int deleteById(Integer depId);
 
+    /**
+     * 查询部门列表
+     */
+    List<DepartmentListResponseDto> queryPageList(DepartmentListRequestDto departmentListRequestDto);
+
+    /**
+     * 部门状态无效
+     */
+    void updateFailureStatusById(Integer depId);
+
+    /**
+     * 部门状态有效
+     */
+    void updateSuccessStatusById(Integer depId);
 }
 

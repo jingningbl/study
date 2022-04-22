@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author q1425
+ */
 @Api(tags = "登陆登出")
 @Controller
 public class IndexController extends BaseController {
@@ -20,12 +23,21 @@ public class IndexController extends BaseController {
     @Autowired
     private EmployeeService employeeService;
 
+    /**
+     * @return: java.lang.String
+     * @description: 登录页面
+     */
     @ApiOperation(value = "跳转登录页面")
     @GetMapping("login")
     public String login() {
         return "login";
     }
 
+    /**
+     * @param loginRequestDto:
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     * @description: 登录验证
+     */
     @ApiOperation(value = "登录验证")
     @PostMapping("/checkLogin")
     @ResponseBody
@@ -50,7 +62,7 @@ public class IndexController extends BaseController {
             modelMap.put("errMsg", "验证码错误");
             return modelMap;
         }
-        if (username.equals("") || password.equals("")) {
+        if ("".equals(username) || "".equals(password)) {
             modelMap.put("success", false);
             modelMap.put("errMsg", "用户名或密码不可为空");
         } else {
@@ -61,7 +73,7 @@ public class IndexController extends BaseController {
                 modelMap.put("success", true);
                 modelMap.put("username", userInfo.getName());
                 //将信息存入到session
-                request.getSession().setAttribute("user", userInfo);
+                request.getSession().setAttribute("userInfo", userInfo);
             } else {
                 modelMap.put("success", false);
                 modelMap.put("errMsg", "用户名或者密码错误");
@@ -70,9 +82,28 @@ public class IndexController extends BaseController {
         return modelMap;
     }
 
+    /**
+     * @return: java.lang.String
+     * @description: 首页
+     */
     @ApiOperation(value = "跳转主页面")
     @GetMapping("main")
     public String toMain() {
+        request.getSession().setAttribute("pageName", "后台首页");
         return "main";
+    }
+
+    /**
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     * @description: 登出
+     */
+    @ApiOperation(value = "退出登录")
+    @PostMapping("logout")
+    @ResponseBody
+    public Map<String, Object> logout() {
+        Map<String, Object> modelMap = new HashMap<>();
+        request.getSession().setAttribute("userInfo", null);
+        modelMap.put("success", true);
+        return modelMap;
     }
 }

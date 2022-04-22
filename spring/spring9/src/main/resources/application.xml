@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <context:component-scan base-package="com.spring9"/>
+    <bean class="com.spring9.service.impl.UserServiceImpl" id="userService"/>
+    <bean class="com.spring9.aop.Advice" id="advice"/>
+    <bean class="com.spring9.aop.Advice1" id="advice1"/>
+    <!--配置AOP-->
+    <aop:config>
+        <!--切点-->
+        <aop:pointcut id="pointcut" expression="execution(* com.spring9.service..*.*(..))"/>
+        <!--切面,order设置优先级-->
+        <aop:aspect ref="advice" order="2">
+            <!--织入-->
+            <aop:before method="before" pointcut-ref="pointcut"/>
+            <aop:after method="after" pointcut-ref="pointcut"/>
+            <aop:after-returning method="afterReturn" pointcut-ref="pointcut"/>
+            <aop:after-throwing method="exception" pointcut-ref="pointcut"/>
+            <aop:around method="around" pointcut-ref="pointcut"/>
+        </aop:aspect>
+        <!--切面-->
+        <aop:aspect ref="advice1" order="1">
+            <!--织入-->
+            <aop:before method="before" pointcut-ref="pointcut"/>
+            <aop:after method="after" pointcut-ref="pointcut"/>
+            <aop:after-returning method="afterReturn" pointcut-ref="pointcut"/>
+            <aop:after-throwing method="exception" pointcut-ref="pointcut"/>
+            <aop:around method="around" pointcut-ref="pointcut"/>
+        </aop:aspect>
+    </aop:config>
+    <aop:aspectj-autoproxy/>
+</beans>

@@ -11,16 +11,20 @@
 
     <!--查询单个-->
     <select id="queryById" resultMap="DepartmentMap">
-        select
-          dep_id, name, address, status
+        select dep_id,
+               name,
+               address,
+               status
         from reimburse.department
         where dep_id = #{depId}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="DepartmentMap">
-        select
-          dep_id, name, address, status
+        select dep_id,
+               name,
+               address,
+               status
         from reimburse.department
         limit #{offset}, #{limit}
     </select>
@@ -28,7 +32,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="DepartmentMap">
         select
-          dep_id, name, address, status
+        dep_id, name, address, status
         from reimburse.department
         <where>
             <if test="depId != null">
@@ -56,7 +60,7 @@
         insert into reimburse.department(name, address, status)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.name}, #{entity.address}, #{entity.status})
+            (#{entity.name}, #{entity.address}, #{entity.status})
         </foreach>
     </insert>
 
@@ -67,7 +71,8 @@
             (#{entity.name}, #{entity.address}, #{entity.status})
         </foreach>
         on duplicate key update
-         name = values(name) , address = values(address) , status = values(status)     </insert>
+        name = values(name) , address = values(address) , status = values(status)
+    </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
@@ -88,8 +93,28 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from reimburse.department where dep_id = #{depId}
+        delete
+        from reimburse.department
+        where dep_id = #{depId}
     </delete>
+
+    <!--查询部门列表-->
+    <select id="queryPageList" resultType="com.ssm1.dto.responseDto.DepartmentListResponseDto">
+        SELECT dep_id, name, address, status
+        FROM reimburse.department
+    </select>
+    <!--部门状态无效-->
+    <update id="updateFailureStatusById">
+        update reimburse.department
+        set status=0
+        where dep_id = #{depId}
+    </update>
+    <!--部门状态有效-->
+    <update id="updateSuccessStatusById">
+        update reimburse.department
+        set status=1
+        where dep_id = #{depId}
+    </update>
 
 </mapper>
 

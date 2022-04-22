@@ -1,12 +1,17 @@
 package com.ssm1.service.impl;
 
+import com.ssm1.dto.requestDto.DepartmentListRequestDto;
+import com.ssm1.dto.requestDto.ToggleDepartmentStatusRequestDto;
+import com.ssm1.dto.responseDto.DepartmentListResponseDto;
 import com.ssm1.entity.Department;
 import com.ssm1.dao.DepartmentDao;
 import com.ssm1.service.DepartmentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 部门表(Department)表服务实现类
@@ -34,7 +39,7 @@ public class DepartmentServiceImpl implements DepartmentService {
      * 查询多条数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     @Override
@@ -75,5 +80,51 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public boolean deleteById(Integer depId) {
         return this.departmentDao.deleteById(depId) > 0;
+    }
+
+    /**
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     * @description: 查询部门列表, 单纯查询, 不需要事物声明
+     */
+    @Override
+    public Map<String, Object> queryPageList(DepartmentListRequestDto departmentListRequestDto) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            List<DepartmentListResponseDto> departmentListResponseDto = departmentDao.queryPageList(departmentListRequestDto);
+            map.put("success", true);
+            map.put("data", departmentListResponseDto);
+        } catch (Exception e) {
+            map.put("success", false);
+            map.put("errMsg", e.getMessage());
+            //如果用到Spring的事物声明,则需要的catch中捕获后抛出,否则事物失效
+        }
+        return map;
+    }
+
+    /**
+     * 对部门状态进行切换
+     */
+    @Override
+    public Map<String, Object> toggleStatus(ToggleDepartmentStatusRequestDto requestDto) {
+        Map<String, Object> map = new HashMap<>();
+        /**
+         * 该部门当前状态
+         */
+        Integer status = requestDto.getStatus();
+        Integer depId = requestDto.getDepId();
+        try {
+            if (status == 1) {
+                //状态禁用
+                departmentDao.updateFailureStatusById(depId);
+            }else {
+                //状态启用
+                departmentDao.updateSuccessStatusById(depId);
+            }
+            map.put("success",true);
+        }catch (Exception e){
+            //TODO:抛出自定义异常
+            throw e;
+        }
+        return null;
     }
 }

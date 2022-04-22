@@ -247,13 +247,12 @@
     </div>
 </div>
 
-<script type="text/javascript" src="/js/jquery.min.js"></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/perfect-scrollbar.min.js"></script>
 <script type="text/javascript" src="/js/main.min.js"></script>
 
 <!--图表插件-->
-<script type="text/javascript" src="js/Chart.js"></script>
+<script type="text/javascript" src="/js/Chart.js"></script>
 <script type="text/javascript">
     $(document).ready(function (e) {
         var $dashChartBarsCnt = jQuery('.js-chartjs-bars')[0].getContext('2d'),

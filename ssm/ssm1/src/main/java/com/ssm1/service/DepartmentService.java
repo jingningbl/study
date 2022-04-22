@@ -1,7 +1,11 @@
 package com.ssm1.service;
 
+import com.ssm1.dto.requestDto.DepartmentListRequestDto;
+import com.ssm1.dto.requestDto.ToggleDepartmentStatusRequestDto;
 import com.ssm1.entity.Department;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * 部门表(Department)表服务接口
@@ -23,7 +27,7 @@ public interface DepartmentService {
      * 查询多条数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     List<Department> queryAllByLimit(int offset, int limit);
@@ -52,4 +56,14 @@ public interface DepartmentService {
      */
     boolean deleteById(Integer depId);
 
+    /**
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     * @description: 查询部门列表
+     */
+    Map<String, Object> queryPageList(DepartmentListRequestDto departmentListRequestDto);
+
+    /**
+     * 对部门状态进行切换
+     */
+    Map<String, Object> toggleStatus(ToggleDepartmentStatusRequestDto requestDto);
 }
