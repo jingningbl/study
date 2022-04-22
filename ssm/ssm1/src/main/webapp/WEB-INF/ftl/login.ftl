@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title>OA系统</title>
+    <link rel="icon" href="/favicon.ico" type="image/ico">
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="/css/style.min.css" rel="stylesheet">
@@ -124,7 +125,7 @@
 </div>
 <script type="text/javascript" src="/js/jquery.min.js"></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-<script src="/js/bootstrap-notify.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap-notify.min.js"></script>
 <script type="text/javascript" src="/js/lightyear.js"></script>
 <script type="text/javascript" src="/js/admin/login.js"></script>
 </body>

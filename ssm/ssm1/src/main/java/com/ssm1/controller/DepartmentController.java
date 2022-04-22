@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,6 +35,13 @@ public class DepartmentController extends BaseController {
         return "department-list";
     }
 
+    @GetMapping("toAddDepartment")
+    @ApiOperation(value = "跳转新增部门页面")
+    public String toAddDepartment() {
+        request.getSession().setAttribute("pageName", "新增部门");
+        return "department-add";
+    }
+
     /**
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      * @description: 查询列表数据
@@ -59,15 +65,27 @@ public class DepartmentController extends BaseController {
 
     @ApiOperation(value = "对单个部门的状态进行切换")
     @PostMapping("toggleDepartmentStatus")
+    @ResponseBody
     public Map<String, Object> toggleDepartmentStatus(@RequestBody ToggleDepartmentStatusRequestDto requestDto) {
         Map<String, Object> map = null;
         try {
-            map=departmentService.toggleStatus(requestDto);
+            map = departmentService.toggleStatus(requestDto);
         } catch (Exception e) {
             map = new HashMap<>();
             map.put("success", false);
             map.put("errMsg", e.getMessage());
         }
         return map;
+    }
+
+    /**
+     *@RequestParam String departmentStr
+     */
+    @PostMapping("insertDepartment")
+    @ResponseBody
+    @ApiOperation(value = "新增部门")
+    public Map<String, Object> insertDepartment(){
+        Map<String, Object> map = null;
+        return null;
     }
 }

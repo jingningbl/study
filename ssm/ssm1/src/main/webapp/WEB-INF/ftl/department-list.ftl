@@ -57,7 +57,7 @@
                                     </label>
                                 </div>
                                 <div class="toolbar-btn-action">
-                                    <a class="btn btn-primary m-r-5" href="#!"><i class="mdi mdi-plus"></i> 新增</a>
+                                    <a class="btn btn-primary m-r-5" href="/department/toAddDepartment"><i class="mdi mdi-plus"></i> 新增</a>
                                     <#--                                    <a class="btn btn-success m-r-5" href="#!"><i class="mdi mdi-check"></i> 启用</a>-->
                                     <#--                                    <a class="btn btn-warning m-r-5" href="#!"><i class="mdi mdi-block-helper"></i> 禁用</a>-->
                                     <#--                                    <a class="btn btn-danger" href="#!"><i class="mdi mdi-window-close"></i> 删除</a>-->
@@ -82,22 +82,6 @@
                                         </tr>
                                         </thead>
                                         <tbody class="department-wrap">
-                                        <tr>
-                                            <td>1</td>
-                                            <td>第01章 天涯思君不可忘</td>
-                                            <td>《倚天屠龙记》</td>
-                                            <td><font class="text-success">正常</font></td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <a class="btn btn-xs btn-default" href="#!" title="编辑"
-                                                       data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
-                                                    <a class="btn btn-xs btn-default" href="#!" title="查看"
-                                                       data-toggle="tooltip"><i class="mdi mdi-eye"></i></a>
-                                                    <a class="btn btn-xs btn-default" href="#!" title="修改状态"
-                                                       data-toggle="tooltip"><i class="mdi mdi-toggle-switch"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -133,6 +117,9 @@
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/perfect-scrollbar.min.js"></script>
 <script type="text/javascript" src="/js/main.min.js"></script>
-<script type="text/javascript" src="/js/department-list.js"></script>
+<#--消息通知-->
+<script type="text/javascript" src="/js/bootstrap-notify.min.js"></script>
+<script type="text/javascript" src="/js/lightyear.js"></script>
+<script type="text/javascript" src="/js/admin/department-list.js"></script>
 </body>
 </html>

@@ -17,7 +17,6 @@ $(function () {
      * 获取部门列表
      */
     function getList() {
-        console.log("部门列表");
         $.ajax({
             url: '/department/getList',
             type: 'post',
@@ -45,7 +44,6 @@ $(function () {
      * @param data
      */
     function handleList(data) {
-        console.log(data)
         let html = ''
         let i = 1
         //遍历渲染
@@ -101,7 +99,6 @@ $(function () {
         //console.log(e.currentTarget.dataset)
         let target = $(e.currentTarget);
         if (target.hasClass('department-status-btn')) {
-            console.log('定位到了修改状态的a标签')
             let depId = e.currentTarget.dataset.id
             let status = e.currentTarget.dataset.status
             $.ajax({
@@ -116,7 +113,15 @@ $(function () {
                     status:status
                 }),
                 success:function (data) {
-                    console.log('修改图标状态')
+                    if (data.success){
+                        lightyear.notify('修改成功~', 'success', 500,
+                            'mdi mdi-emoticon-happy', 'top', 'center')
+                        getList()
+                    }else {
+                        lightyear.notify('修改失败~', 'danger', 500,
+                            'mdi mdi-emoticon-dead', 'top', 'center')
+                        getList()
+                    }
                 }
             })
         }

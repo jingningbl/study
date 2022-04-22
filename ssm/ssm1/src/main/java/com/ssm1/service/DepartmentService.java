@@ -65,5 +65,5 @@ public interface DepartmentService {
     /**
      * 对部门状态进行切换
      */
-    Map<String, Object> toggleStatus(ToggleDepartmentStatusRequestDto requestDto);
+    Map<String, Object> toggleStatus(ToggleDepartmentStatusRequestDto requestDto) throws Exception;
 }

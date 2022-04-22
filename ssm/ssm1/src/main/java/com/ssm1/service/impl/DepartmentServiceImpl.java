@@ -7,6 +7,8 @@ import com.ssm1.entity.Department;
 import com.ssm1.dao.DepartmentDao;
 import com.ssm1.service.DepartmentService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -104,8 +106,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     /**
      * 对部门状态进行切换
      */
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     @Override
-    public Map<String, Object> toggleStatus(ToggleDepartmentStatusRequestDto requestDto) {
+    public Map<String, Object> toggleStatus(ToggleDepartmentStatusRequestDto requestDto) throws Exception {
         Map<String, Object> map = new HashMap<>();
         /**
          * 该部门当前状态
@@ -116,15 +119,16 @@ public class DepartmentServiceImpl implements DepartmentService {
             if (status == 1) {
                 //状态禁用
                 departmentDao.updateFailureStatusById(depId);
-            }else {
+                throw new Exception("测试异常");
+            } else {
                 //状态启用
                 departmentDao.updateSuccessStatusById(depId);
             }
-            map.put("success",true);
-        }catch (Exception e){
-            //TODO:抛出自定义异常
+            map.put("success", true);
+        } catch (Exception e) {
+            //使用了声明式事物,必须要将异常抛出,否则事物失效
             throw e;
         }
-        return null;
+        return map;
     }
 }

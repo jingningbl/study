@@ -103,17 +103,19 @@
         SELECT dep_id, name, address, status
         FROM reimburse.department
     </select>
+
     <!--部门状态无效-->
     <update id="updateFailureStatusById">
-        update reimburse.department
-        set status=0
-        where dep_id = #{depId}
+        UPDATE reimburse.department
+        SET status=0
+        WHERE dep_id = #{depId}
     </update>
+
     <!--部门状态有效-->
     <update id="updateSuccessStatusById">
-        update reimburse.department
-        set status=1
-        where dep_id = #{depId}
+        UPDATE reimburse.department
+        SET status=1
+        WHERE dep_id = #{depId}
     </update>
 
 </mapper>
