@@ -1,9 +1,15 @@
 package com.ssm1.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ssm1.dto.requestDto.DepartmentListRequestDto;
 import com.ssm1.dto.requestDto.ToggleDepartmentStatusRequestDto;
+import com.ssm1.dto.responseDto.DepartmentListResponseDto;
 import com.ssm1.entity.Department;
+import org.apache.ibatis.annotations.Param;
 
+import java.sql.Wrapper;
 import java.util.List;
 import java.util.Map;
 
@@ -66,4 +72,5 @@ public interface DepartmentService {
      * 对部门状态进行切换
      */
     Map<String, Object> toggleStatus(ToggleDepartmentStatusRequestDto requestDto) throws Exception;
+
 }

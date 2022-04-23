@@ -1,13 +1,17 @@
 package com.ssm1.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssm1.dto.requestDto.DepartmentListRequestDto;
 import com.ssm1.dto.requestDto.ToggleDepartmentStatusRequestDto;
+import com.ssm1.entity.Department;
 import com.ssm1.service.DepartmentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,6 +46,20 @@ public class DepartmentController extends BaseController {
         return "department-add";
     }
 
+    @GetMapping("goDepartment")
+    @ApiOperation(value = "跳转查看部门详情")
+    public String goDepartment() {
+        request.getSession().setAttribute("pageName", "部门详情");
+        return "department-info";
+    }
+
+    @GetMapping("goDepartmentEdit")
+    @ApiOperation(value = "跳转修改部门详情")
+    public String goDepartmentEdit() {
+        request.getSession().setAttribute("pageName", "修改部门");
+        return "department-update";
+    }
+
     /**
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      * @description: 查询列表数据
@@ -51,7 +69,7 @@ public class DepartmentController extends BaseController {
     @ApiOperation(value = "查询列表数据(包括分页,模糊,条件查询)")
     @PostMapping("getList")
     @ResponseBody
-    public Map<String, Object> getList(DepartmentListRequestDto departmentListRequestDto) {
+    public Map<String, Object> getList(@RequestBody DepartmentListRequestDto departmentListRequestDto) {
         Map<String, Object> map = null;
         try {
             map = departmentService.queryPageList(departmentListRequestDto);
@@ -79,13 +97,73 @@ public class DepartmentController extends BaseController {
     }
 
     /**
-     *@RequestParam String departmentStr
+     * @RequestParam String departmentStr
      */
     @PostMapping("insertDepartment")
     @ResponseBody
     @ApiOperation(value = "新增部门")
-    public Map<String, Object> insertDepartment(){
-        Map<String, Object> map = null;
-        return null;
+    public Map<String, Object> insertDepartment(@RequestParam String departmentStr) {
+        Map<String, Object> map = new HashMap<>();
+        Department department = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            department = mapper.readValue(departmentStr, Department.class);
+        } catch (JsonProcessingException e) {
+            map.put("success", false);
+            map.put("errMsg", "传入的json格式不对");
+            return map;
+        }
+        try {
+            departmentService.insert(department);
+        } catch (Exception e) {
+            map.put("success", false);
+            map.put("errMsg", e.getMessage());
+            return map;
+        }
+        map.put("success", true);
+        return map;
+    }
+
+    @PostMapping("queryDepartment")
+    @ApiOperation(value = "查看指定部门信息")
+    @ResponseBody
+    public Map<String, Object> queryDepartmentById(Integer departmentId) {
+        Map<String, Object> map = new HashMap<>();
+        Department department = null;
+        try {
+            department = departmentService.queryById(departmentId);
+        } catch (Exception e) {
+            map.put("success", false);
+            map.put("errMsg", e.getMessage());
+            return map;
+        }
+        map.put("success", true);
+        map.put("data", department);
+        return map;
+    }
+
+    @PostMapping("editDepartment")
+    @ApiOperation(value = "修改指定部门信息")
+    @ResponseBody
+    public Map<String, Object> editDepartmentById(@RequestParam String departmentStr) {
+        Map<String, Object> map = new HashMap<>();
+        Department department = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            department = mapper.readValue(departmentStr, Department.class);
+        } catch (JsonProcessingException e) {
+            map.put("success", false);
+            map.put("errMsg", "传入的json格式不对");
+            return map;
+        }
+        try {
+            departmentService.update(department);
+        } catch (Exception e) {
+            map.put("success", false);
+            map.put("errMsg", e.getMessage());
+            return map;
+        }
+        map.put("success", true);
+        return map;
     }
 }

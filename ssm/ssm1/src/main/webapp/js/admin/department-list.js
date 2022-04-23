@@ -1,4 +1,6 @@
 $(function () {
+    //定义渲染列表条件
+    let request_condition = {}
     /**
      * 部门页面,筛选下拉框
      */
@@ -8,15 +10,42 @@ $(function () {
         $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
     });
 
+    //监听某个按键按下事件,回车键的码13
+    $('#search-input').keydown(function (e) {
+        if (e.keyCode === 13) {
+            let type = $('#search-field').val()
+            let keyword = $('#search-input').val();
+            if (type === 'name') {
+                request_condition.name = keyword
+                request_condition.address=null
+                getList(request_condition)
+            } else {
+                request_condition.address = keyword
+                request_condition.name=null
+                getList(request_condition)
+            }
+        }
+    })
+
+    $('#status-switch').change(function () {
+        //开关的状态
+        if ($('#status-switch').is(':checked')) {
+            request_condition.status = 1
+            getList(request_condition)
+        } else {
+            request_condition.status = null
+            getList(request_condition)
+        }
+    })
     /**
      * 初始化部门列表
      */
-    getList()
+    getList(request_condition)
 
     /**
      * 获取部门列表
      */
-    function getList() {
+    function getList(data) {
         $.ajax({
             url: '/department/getList',
             type: 'post',
@@ -24,16 +53,21 @@ $(function () {
             cache: false,
             datatype: 'json',
             contentType: 'application/json;charset=utf-8',
+            data: JSON.stringify(data),
             success: function (data) {
                 if (data.success) {
                     /**
                      * 获取列表数据,进行动态渲染
                      */
-                    console.log("部门列表");
                     handleList(data.data)
+                    if (data.data.length===0){
+                        lightyear.notify('没有符合条件的部门~', 'danger', 500,
+                            'mdi mdi-emoticon-sad', 'top', 'center')
+                    }
                 } else {
                     //TODO:提醒
-                    console.log("获取失败");
+                    lightyear.notify('查询失败~', 'danger', 500,
+                        'mdi mdi-emoticon-dead', 'top', 'center')
                 }
             }
         })
@@ -55,8 +89,8 @@ $(function () {
                 + departmentStatus(item.status)
                 + '<td>'
                 + '<div class="btn-group">'
-                + '<a class="btn btn-xs btn-default" href="#!" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>'
-                + '<a class="btn btn-xs btn-default" href="#!" title="查看" data-toggle="tooltip"><i class="mdi mdi-eye"></i></a>'
+                + '<a class="btn btn-xs btn-default" href="/department/goDepartmentEdit?edit=true&depId=' + item.depId + '" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>'
+                + '<a class="btn btn-xs btn-default" href="/department/goDepartment?depId=' + item.depId + '" title="查看" data-toggle="tooltip"><i class="mdi mdi-eye"></i></a>'
                 + updateDepartmentStatus(item.depId, item.status)
                 + '</div>'
                 + '</td>'
@@ -108,19 +142,19 @@ $(function () {
                 cache: false,
                 datatype: 'json',
                 contentType: 'application/json;charset=utf-8',
-                data:JSON.stringify({
-                    depId:depId,
-                    status:status
+                data: JSON.stringify({
+                    depId: depId,
+                    status: status
                 }),
-                success:function (data) {
-                    if (data.success){
+                success: function (data) {
+                    if (data.success) {
                         lightyear.notify('修改成功~', 'success', 500,
                             'mdi mdi-emoticon-happy', 'top', 'center')
-                        getList()
-                    }else {
+                        getList(request_condition)
+                    } else {
                         lightyear.notify('修改失败~', 'danger', 500,
                             'mdi mdi-emoticon-dead', 'top', 'center')
-                        getList()
+                        getList(request_condition)
                     }
                 }
             })

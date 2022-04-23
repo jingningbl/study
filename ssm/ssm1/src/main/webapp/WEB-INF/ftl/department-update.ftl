@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-    <title>新增部门</title>
+    <title>修改部门</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/materialdesignicons.min.css" rel="stylesheet">
     <!--标签插件-->
     <#--    <link rel="stylesheet" href="/js/jquery-tags-input/jquery.tagsinput.min.css">-->
-        <link href="/css/style.min.css" rel="stylesheet">
+    <link href="/css/style.min.css" rel="stylesheet">
 </head>
 
 <body>

@@ -1,10 +1,14 @@
 package com.ssm1.dao;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ssm1.dto.requestDto.DepartmentListRequestDto;
 import com.ssm1.dto.responseDto.DepartmentListResponseDto;
 import com.ssm1.entity.Department;
 import org.apache.ibatis.annotations.Param;
 
+import java.sql.Wrapper;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +36,6 @@ public interface DepartmentDao {
      * @return 对象列表
      */
     List<Department> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
-
 
     /**
      * 通过实体作为筛选条件查询
@@ -85,8 +88,11 @@ public interface DepartmentDao {
     /**
      * 查询部门列表
      */
-    List<DepartmentListResponseDto> queryPageList(DepartmentListRequestDto departmentListRequestDto);
+//    List<DepartmentListResponseDto> queryPageList(DepartmentListRequestDto departmentListRequestDto);
 
+    IPage<DepartmentListResponseDto> queryPageList(
+            Page<DepartmentListRequestDto> departmentListRequestDto,
+            @Param(Constants.WRAPPER) Wrapper queryWrapper);
     /**
      * 部门状态无效
      */

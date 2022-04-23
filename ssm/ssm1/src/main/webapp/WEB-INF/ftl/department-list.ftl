@@ -45,14 +45,14 @@
                                                        data-field="address">地址</a></li>
                                             </ul>
                                         </div>
-                                        <input type="text" class="form-control" value="" name="keyword"
+                                        <input id="search-input" type="text" class="form-control" value="" name="keyword"
                                                placeholder="请输入关键字">
                                     </div>
                                 </div>
                                 <#--pull-right有浮动,先加载的最右,,m-10各边距各10px,开关-->
                                 <div class="pull-right m-10">
                                     <label class="lyear-switch switch-info">
-                                        <input type="checkbox">筛选状态
+                                        <input id="status-switch" type="checkbox">筛选状态
                                         <span></span>
                                     </label>
                                 </div>

@@ -92,9 +92,10 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Map<String, Object> queryPageList(DepartmentListRequestDto departmentListRequestDto) {
         Map<String, Object> map = new HashMap<>();
         try {
-            List<DepartmentListResponseDto> departmentListResponseDto = departmentDao.queryPageList(departmentListRequestDto);
+//            List<DepartmentListResponseDto> departmentListResponseDto = departmentDao.queryPageList(departmentListRequestDto);
+
             map.put("success", true);
-            map.put("data", departmentListResponseDto);
+//            map.put("data", departmentListResponseDto);
         } catch (Exception e) {
             map.put("success", false);
             map.put("errMsg", e.getMessage());
@@ -119,7 +120,6 @@ public class DepartmentServiceImpl implements DepartmentService {
             if (status == 1) {
                 //状态禁用
                 departmentDao.updateFailureStatusById(depId);
-                throw new Exception("测试异常");
             } else {
                 //状态启用
                 departmentDao.updateSuccessStatusById(depId);
@@ -129,6 +129,7 @@ public class DepartmentServiceImpl implements DepartmentService {
             //使用了声明式事物,必须要将异常抛出,否则事物失效
             throw e;
         }
+
         return map;
     }
 }
