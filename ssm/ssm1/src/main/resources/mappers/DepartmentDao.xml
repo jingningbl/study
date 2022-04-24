@@ -98,30 +98,31 @@
         where dep_id = #{depId}
     </delete>
 
-<!--    &lt;!&ndash;查询部门列表&ndash;&gt;-->
-<!--    <select id="queryPageList" resultType="com.ssm1.dto.responseDto.DepartmentListResponseDto">-->
-<!--        select-->
-<!--        dep_id, name, address, status-->
-<!--        from reimburse.department-->
-<!--        <where>-->
-<!--            <if test="name != null and name != ''">-->
-<!--                and name like concat('%',#{name},'%')-->
-<!--            </if>-->
-<!--            <if test="address != null and address != ''">-->
-<!--                and address like concat('%',#{address},'%')-->
-<!--            </if>-->
-<!--            <if test="status != null">-->
-<!--                and status = #{status}-->
-<!--            </if>-->
-<!--        </where>-->
-<!--    </select>-->
+    <!--    &lt;!&ndash;查询部门列表&ndash;&gt;-->
+    <!--    <select id="queryPageList" resultType="com.ssm1.dto.responseDto.DepartmentListResponseDto">-->
+    <!--        select-->
+    <!--        dep_id, name, address, status-->
+    <!--        from reimburse.department-->
+    <!--        <where>-->
+    <!--            <if test="name != null and name != ''">-->
+    <!--                and name like concat('%',#{name},'%')-->
+    <!--            </if>-->
+    <!--            <if test="address != null and address != ''">-->
+    <!--                and address like concat('%',#{address},'%')-->
+    <!--            </if>-->
+    <!--            <if test="status != null">-->
+    <!--                and status = #{status}-->
+    <!--            </if>-->
+    <!--        </where>-->
+    <!--    </select>-->
 
-    <!--查询部门列表-->
+    <!--查询部门列表,mybatisplus分页查询-->
     <select id="queryPageList" resultType="com.ssm1.dto.responseDto.DepartmentListResponseDto">
-        select
-        dep_id, name, address, status
-        from reimburse.department
-        where ${ew}
+        select dep_id,
+               name,
+               address,
+               status
+        from reimburse.department ${ew.customSqlSegment}
     </select>
 
     <!--部门状态无效-->

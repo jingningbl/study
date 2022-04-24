@@ -1,5 +1,6 @@
 package com.ssm1.dao;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -8,9 +9,7 @@ import com.ssm1.dto.responseDto.DepartmentListResponseDto;
 import com.ssm1.entity.Department;
 import org.apache.ibatis.annotations.Param;
 
-import java.sql.Wrapper;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 部门表(Department)表数据库访问层
@@ -92,7 +91,7 @@ public interface DepartmentDao {
 
     IPage<DepartmentListResponseDto> queryPageList(
             Page<DepartmentListRequestDto> departmentListRequestDto,
-            @Param(Constants.WRAPPER) Wrapper queryWrapper);
+            @Param(Constants.WRAPPER) Wrapper<DepartmentListRequestDto> queryWrapper);
     /**
      * 部门状态无效
      */

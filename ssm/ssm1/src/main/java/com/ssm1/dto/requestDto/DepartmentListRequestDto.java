@@ -1,5 +1,6 @@
 package com.ssm1.dto.requestDto;
 
+import com.ssm1.dto.PageDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -11,7 +12,7 @@ import java.io.Serializable;
  * @description: 获取部门列表
  */
 @ApiModel(description = "部门列表RequestDto")
-public class DepartmentListRequestDto implements Serializable {
+public class DepartmentListRequestDto extends PageDto implements Serializable {
 
     private static final long serialVersionUID = 7597479925937532259L;
 

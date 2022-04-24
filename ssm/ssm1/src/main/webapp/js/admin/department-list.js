@@ -1,6 +1,8 @@
 $(function () {
     //定义渲染列表条件
     let request_condition = {}
+    //是否初始化分页插件
+    let flag = true
     /**
      * 部门页面,筛选下拉框
      */
@@ -12,22 +14,28 @@ $(function () {
 
     //监听某个按键按下事件,回车键的码13
     $('#search-input').keydown(function (e) {
+        //初始化分页插件
+        flag = true
+        request_condition.current = 1
         if (e.keyCode === 13) {
             let type = $('#search-field').val()
             let keyword = $('#search-input').val();
             if (type === 'name') {
                 request_condition.name = keyword
-                request_condition.address=null
+                request_condition.address = null
                 getList(request_condition)
             } else {
                 request_condition.address = keyword
-                request_condition.name=null
+                request_condition.name = null
                 getList(request_condition)
             }
         }
     })
 
     $('#status-switch').change(function () {
+        //筛选状态后,重新渲染页面前,让分页插件可以再次初始化
+        flag = true
+        request_condition.current = 1
         //开关的状态
         if ($('#status-switch').is(':checked')) {
             request_condition.status = 1
@@ -59,8 +67,13 @@ $(function () {
                     /**
                      * 获取列表数据,进行动态渲染
                      */
-                    handleList(data.data)
-                    if (data.data.length===0){
+                    //初始化分页插件
+                    if (flag) {
+                        getPageInfo(data.data)
+                        flag = false
+                    }
+                    handleList(data.data.records)
+                    if (data.data.records.length === 0) {
                         lightyear.notify('没有符合条件的部门~', 'danger', 500,
                             'mdi mdi-emoticon-sad', 'top', 'center')
                     }
@@ -135,6 +148,10 @@ $(function () {
         if (target.hasClass('department-status-btn')) {
             let depId = e.currentTarget.dataset.id
             let status = e.currentTarget.dataset.status
+            if (request_condition.status === 1) {
+                flag = true
+                request_condition.current = 1
+            }
             $.ajax({
                 url: '/department/toggleDepartmentStatus',
                 type: 'post',
@@ -161,4 +178,21 @@ $(function () {
         }
     })
 
+    /**
+     * 获取分页信息
+     * coping:是否显示首尾页
+     */
+    function getPageInfo(data) {
+        //初始化分页插件
+        $('#jq-page').pagination({
+            pageCount: data.pages,
+            coping: true,
+            //触发分页的按钮
+            callback: function (e) {
+                //获取用户当前点击的页数,作为参数传给getList
+                request_condition.current = e.getCurrent()
+                getList(request_condition)
+            }
+        })
+    }
 });

@@ -7,6 +7,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="/css/style.min.css" rel="stylesheet">
+    <link href="/css/pagination.css" rel="stylesheet">
 </head>
 
 <body>
@@ -85,20 +86,20 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <ul class="pagination">
-                                    <li class="disabled"><span>«</span></li>
-                                    <li class="active"><span>1</span></li>
-                                    <li><a href="#1">2</a></li>
-                                    <li><a href="#1">3</a></li>
-                                    <li><a href="#1">4</a></li>
-                                    <li><a href="#1">5</a></li>
-                                    <li><a href="#1">6</a></li>
-                                    <li><a href="#1">7</a></li>
-                                    <li><a href="#1">8</a></li>
-                                    <li class="disabled"><span>...</span></li>
-                                    <li><a href="#!">14452</a></li>
-                                    <li><a href="#!">14453</a></li>
-                                    <li><a href="#!">»</a></li>
+                                <ul id="jq-page" class="m-style">
+<#--                                    <li class="disabled"><span>«</span></li>-->
+<#--                                    <li class="active"><span>1</span></li>-->
+<#--                                    <li><a href="#1">2</a></li>-->
+<#--                                    <li><a href="#1">3</a></li>-->
+<#--                                    <li><a href="#1">4</a></li>-->
+<#--                                    <li><a href="#1">5</a></li>-->
+<#--                                    <li><a href="#1">6</a></li>-->
+<#--                                    <li><a href="#1">7</a></li>-->
+<#--                                    <li><a href="#1">8</a></li>-->
+<#--                                    <li class="disabled"><span>...</span></li>-->
+<#--                                    <li><a href="#!">14452</a></li>-->
+<#--                                    <li><a href="#!">14453</a></li>-->
+<#--                                    <li><a href="#!">»</a></li>-->
                                 </ul>
                             </div>
                         </div>
@@ -120,6 +121,7 @@
 <#--消息通知-->
 <script type="text/javascript" src="/js/bootstrap-notify.min.js"></script>
 <script type="text/javascript" src="/js/lightyear.js"></script>
+<script type="text/javascript" src="/js/jquery.pagination.js"></script>
 <script type="text/javascript" src="/js/admin/department-list.js"></script>
 </body>
 </html>

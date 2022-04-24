@@ -1,10 +1,13 @@
 package com.ssm1.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.ssm1.dao.DepartmentDao;
 import com.ssm1.dto.requestDto.DepartmentListRequestDto;
 import com.ssm1.dto.requestDto.ToggleDepartmentStatusRequestDto;
 import com.ssm1.dto.responseDto.DepartmentListResponseDto;
 import com.ssm1.entity.Department;
-import com.ssm1.dao.DepartmentDao;
 import com.ssm1.service.DepartmentService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -93,9 +96,21 @@ public class DepartmentServiceImpl implements DepartmentService {
         Map<String, Object> map = new HashMap<>();
         try {
 //            List<DepartmentListResponseDto> departmentListResponseDto = departmentDao.queryPageList(departmentListRequestDto);
+            //封装查询条件
+            QueryWrapper<DepartmentListRequestDto> wrapper = new QueryWrapper<>();
+            if (departmentListRequestDto.getName() != null) {
+                wrapper.like("name", departmentListRequestDto.getName());
+            } else if ((departmentListRequestDto.getAddress() != null)) {
+                wrapper.like("address", departmentListRequestDto.getAddress());
+            }
+            if (departmentListRequestDto.getStatus() != null) {
+                wrapper.eq("status", departmentListRequestDto.getStatus());
+            }
+            Page<DepartmentListRequestDto> page = new Page<>(departmentListRequestDto.getCurrent(), departmentListRequestDto.getSize());
+            IPage<DepartmentListResponseDto> department = departmentDao.queryPageList(page, wrapper);
 
             map.put("success", true);
-//            map.put("data", departmentListResponseDto);
+            map.put("data", department);
         } catch (Exception e) {
             map.put("success", false);
             map.put("errMsg", e.getMessage());
