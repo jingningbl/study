@@ -1,7 +1,10 @@
 package com.ssm1.service;
 
+import com.ssm1.dto.requestDto.PositionListRequestDto;
+import com.ssm1.dto.requestDto.TogglePositionStatusRequestDto;
 import com.ssm1.entity.Position;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 职位表(Position)表服务接口
@@ -52,4 +55,11 @@ public interface PositionService {
      */
     boolean deleteById(Integer positionId);
 
+    /**
+     * @return: java.util.Map<java.lang.String, java.lang.Object>
+     * @description: 查询职位列表
+     */
+    Map<String, Object> queryPageList(PositionListRequestDto requestDto);
+
+    Map<String, Object> toggleStatus(TogglePositionStatusRequestDto requestDto);
 }

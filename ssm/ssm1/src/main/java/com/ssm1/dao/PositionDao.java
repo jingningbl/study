@@ -1,5 +1,11 @@
 package com.ssm1.dao;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.ssm1.dto.requestDto.PositionListRequestDto;
+import com.ssm1.dto.responseDto.PositionListResponseDto;
 import com.ssm1.entity.Position;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -78,5 +84,12 @@ public interface PositionDao {
      */
     int deleteById(Integer positionId);
 
+    IPage<PositionListResponseDto> queryPageList(
+            Page<PositionListRequestDto> page,
+            @Param(Constants.WRAPPER)QueryWrapper<PositionListRequestDto> wrapper);
+
+    void updateFailureStatusById(Integer positionId);
+
+    void updateSuccessStatusById(Integer positionId);
 }
 

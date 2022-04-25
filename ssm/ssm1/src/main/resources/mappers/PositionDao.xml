@@ -11,16 +11,20 @@
 
     <!--查询单个-->
     <select id="queryById" resultMap="PositionMap">
-        select
-          position_id, position_name, create_time, status
+        select position_id,
+               position_name,
+               create_time,
+               status
         from reimburse.position
         where position_id = #{positionId}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="PositionMap">
-        select
-          position_id, position_name, create_time, status
+        select position_id,
+               position_name,
+               create_time,
+               status
         from reimburse.position
         limit #{offset}, #{limit}
     </select>
@@ -28,7 +32,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="PositionMap">
         select
-          position_id, position_name, create_time, status
+        position_id, position_name, create_time, status
         from reimburse.position
         <where>
             <if test="positionId != null">
@@ -56,7 +60,7 @@
         insert into reimburse.position(position_name, create_time, status)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.positionName}, #{entity.createTime}, #{entity.status})
+            (#{entity.positionName}, #{entity.createTime}, #{entity.status})
         </foreach>
     </insert>
 
@@ -67,7 +71,8 @@
             (#{entity.positionName}, #{entity.createTime}, #{entity.status})
         </foreach>
         on duplicate key update
-         position_name = values(position_name) , create_time = values(create_time) , status = values(status)     </insert>
+        position_name = values(position_name) , create_time = values(create_time) , status = values(status)
+    </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
@@ -88,8 +93,26 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from reimburse.position where position_id = #{positionId}
+        delete
+        from reimburse.position
+        where position_id = #{positionId}
     </delete>
+
+    <select id="queryPageList" resultType="com.ssm1.dto.responseDto.PositionListResponseDto">
+        select position_id, position_name, create_time, status
+        from reimburse.position ${ew.customSqlSegment}
+    </select>
+
+    <update id="updateFailureStatusById">
+        UPDATE reimburse.position
+        SET status=0
+        WHERE position_id = #{positionId}
+    </update>
+    <update id="updateSuccessStatusById">
+        UPDATE reimburse.position
+        SET status=1
+        WHERE position_id = #{positionId}
+    </update>
 
 </mapper>
 
