@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ssm1.dao.DepartmentDao;
 import com.ssm1.dto.requestDto.DepartmentListRequestDto;
 import com.ssm1.dto.requestDto.ToggleDepartmentStatusRequestDto;
+import com.ssm1.dto.responseDto.ActiveDepartmentListResponseDto;
 import com.ssm1.dto.responseDto.DepartmentListResponseDto;
 import com.ssm1.entity.Department;
 import com.ssm1.service.DepartmentService;
@@ -145,6 +146,20 @@ public class DepartmentServiceImpl implements DepartmentService {
             throw e;
         }
 
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> queryActiveDepartmentList() {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            List<ActiveDepartmentListResponseDto> department = departmentDao.queryActiveDepartmentList();
+            map.put("success", true);
+            map.put("data", department);
+        } catch (Exception e) {
+            map.put("success", false);
+            map.put("errMsg", e.getMessage());
+        }
         return map;
     }
 }

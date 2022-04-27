@@ -52,8 +52,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="positionId" useGeneratedKeys="true">
-        insert into reimburse.position(position_name, create_time, status)
-        values (#{positionName}, #{createTime}, #{status})
+        insert into reimburse.position(position_name, status)
+        values (#{positionName}, #{status})
     </insert>
 
     <insert id="insertBatch" keyProperty="positionId" useGeneratedKeys="true">
@@ -113,6 +113,12 @@
         SET status=1
         WHERE position_id = #{positionId}
     </update>
+
+    <select id="queryActivePositionList" resultType="com.ssm1.dto.responseDto.ActivePositionListResponseDto">
+        select position_id, position_name
+        from reimburse.position
+        where status = 1
+    </select>
 
 </mapper>
 

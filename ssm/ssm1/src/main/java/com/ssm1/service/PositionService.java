@@ -62,4 +62,6 @@ public interface PositionService {
     Map<String, Object> queryPageList(PositionListRequestDto requestDto);
 
     Map<String, Object> toggleStatus(TogglePositionStatusRequestDto requestDto);
+
+    Map<String, Object> queryActivePositionList();
 }

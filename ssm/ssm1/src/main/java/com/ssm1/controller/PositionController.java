@@ -3,9 +3,7 @@ package com.ssm1.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssm1.dto.requestDto.PositionListRequestDto;
-import com.ssm1.dto.requestDto.ToggleDepartmentStatusRequestDto;
 import com.ssm1.dto.requestDto.TogglePositionStatusRequestDto;
-import com.ssm1.entity.Department;
 import com.ssm1.entity.Position;
 import com.ssm1.service.PositionService;
 import io.swagger.annotations.Api;
@@ -125,47 +123,62 @@ public class PositionController extends BaseController {
         map.put("success", true);
         return map;
     }
-//
-//    @PostMapping("queryDepartment")
-//    @ApiOperation(value = "查看指定职位信息")
-//    @ResponseBody
-//    public Map<String, Object> queryDepartmentById(Integer positionId) {
-//        Map<String, Object> map = new HashMap<>();
-//        Department position = null;
-//        try {
-//            position = positionService.queryById(positionId);
-//        } catch (Exception e) {
-//            map.put("success", false);
-//            map.put("errMsg", e.getMessage());
-//            return map;
-//        }
-//        map.put("success", true);
-//        map.put("data", position);
-//        return map;
-//    }
-//
-//    @PostMapping("editDepartment")
-//    @ApiOperation(value = "修改指定职位信息")
-//    @ResponseBody
-//    public Map<String, Object> editDepartmentById(@RequestParam String positionStr) {
-//        Map<String, Object> map = new HashMap<>();
-//        Department position = null;
-//        ObjectMapper mapper = new ObjectMapper();
-//        try {
-//            position = mapper.readValue(positionStr, Department.class);
-//        } catch (JsonProcessingException e) {
-//            map.put("success", false);
-//            map.put("errMsg", "传入的json格式不对");
-//            return map;
-//        }
-//        try {
-//            positionService.update(position);
-//        } catch (Exception e) {
-//            map.put("success", false);
-//            map.put("errMsg", e.getMessage());
-//            return map;
-//        }
-//        map.put("success", true);
-//        return map;
-//    }
+
+    @PostMapping("queryPosition")
+    @ApiOperation(value = "查看指定职位信息")
+    @ResponseBody
+    public Map<String, Object> queryPositionById(Integer positionId) {
+        Map<String, Object> map = new HashMap<>();
+        Position position = null;
+        try {
+            position = positionService.queryById(positionId);
+        } catch (Exception e) {
+            map.put("success", false);
+            map.put("errMsg", e.getMessage());
+            return map;
+        }
+        map.put("success", true);
+        map.put("data", position);
+        return map;
+    }
+
+    @PostMapping("editPosition")
+    @ApiOperation(value = "修改指定职位信息")
+    @ResponseBody
+    public Map<String, Object> editPositionById(@RequestParam String positionStr) {
+        Map<String, Object> map = new HashMap<>();
+        Position position = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            position = mapper.readValue(positionStr, Position.class);
+        } catch (JsonProcessingException e) {
+            map.put("success", false);
+            map.put("errMsg", "传入的json格式不对");
+            return map;
+        }
+        try {
+            positionService.update(position);
+        } catch (Exception e) {
+            map.put("success", false);
+            map.put("errMsg", e.getMessage());
+            return map;
+        }
+        map.put("success", true);
+        return map;
+    }
+    @ApiOperation(value = "查询有效职位列表数据")
+    @PostMapping("queryActivePositionList")
+    @ResponseBody
+    public Map<String, Object> queryActivePositionList() {
+        Map<String, Object> map = null;
+        try {
+            map = positionService.queryActivePositionList();
+        } catch (Exception e) {
+            map = new HashMap<>();
+            map.put("success", false);
+            map.put("errMsg", e.getMessage());
+        }
+        return map;
+    }
+
 }

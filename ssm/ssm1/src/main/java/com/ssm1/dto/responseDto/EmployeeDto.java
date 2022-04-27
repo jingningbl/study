@@ -21,13 +21,7 @@ public class EmployeeDto implements Serializable {
      */
     @ApiModelProperty(value = "主键id")
     private Integer emId;
-    /**
-     * 密码
-     */
-//    private String password;
-    /**
-     * 姓名
-     */
+
     @ApiModelProperty(value = "姓名")
     private String name;
     /**
@@ -72,14 +66,6 @@ public class EmployeeDto implements Serializable {
         this.emId = emId;
     }
 
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
-
     public String getName() {
         return name;
     }
@@ -118,5 +104,21 @@ public class EmployeeDto implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 }

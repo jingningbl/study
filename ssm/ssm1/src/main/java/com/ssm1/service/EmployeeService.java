@@ -1,19 +1,61 @@
 package com.ssm1.service;
 
+import com.ssm1.dto.requestDto.EmployeeListRequestDto;
 import com.ssm1.dto.responseDto.EmployeeDto;
+import com.ssm1.entity.Employee;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 员工表(Employee)表服务接口
  *
  * @author makejava
- * @since 2022-04-16 17:28:56
+ * @since 2022-04-26 15:01:37
  */
-public interface EmployeeService{
+public interface EmployeeService {
+
     /**
-     * @param username:
-     * @param password:
-     * @return: com.ssm1.dto.responseDto.EmployeeDto
-     * @description:通过用户名密码查询用户信息
+     * 通过ID查询单条数据
+     *
+     * @param emId 主键
+     * @return 实例对象
      */
+    Employee queryById(Integer emId);
+
+    /**
+     * 查询多条数据
+     *
+     * @param offset 查询起始位置
+     * @param limit 查询条数
+     * @return 对象列表
+     */
+    List<Employee> queryAllByLimit(int offset, int limit);
+
+    /**
+     * 新增数据
+     *
+     * @param employee 实例对象
+     * @return 实例对象
+     */
+    Employee insert(Employee employee);
+
+    /**
+     * 修改数据
+     *
+     * @param employee 实例对象
+     * @return 实例对象
+     */
+    Employee update(Employee employee);
+
+    /**
+     * 通过主键删除数据
+     *
+     * @param emId 主键
+     * @return 是否成功
+     */
+    boolean deleteById(Integer emId);
+
     EmployeeDto getEmInfoByUsernameAndPassword(String username, String password);
+
+    Map<String, Object> queryPageList(EmployeeListRequestDto requestDto);
 }

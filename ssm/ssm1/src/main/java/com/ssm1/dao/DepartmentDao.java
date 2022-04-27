@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ssm1.dto.requestDto.DepartmentListRequestDto;
+import com.ssm1.dto.responseDto.ActiveDepartmentListResponseDto;
 import com.ssm1.dto.responseDto.DepartmentListResponseDto;
 import com.ssm1.entity.Department;
 import org.apache.ibatis.annotations.Param;
@@ -101,5 +102,11 @@ public interface DepartmentDao {
      * 部门状态有效
      */
     void updateSuccessStatusById(Integer depId);
+
+    /**
+     * 查询所有有效部门
+     * @return
+     */
+    List<ActiveDepartmentListResponseDto> queryActiveDepartmentList();
 }
 

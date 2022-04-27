@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ssm1.dto.requestDto.PositionListRequestDto;
+import com.ssm1.dto.responseDto.ActivePositionListResponseDto;
 import com.ssm1.dto.responseDto.PositionListResponseDto;
 import com.ssm1.entity.Position;
 import org.apache.ibatis.annotations.Param;
@@ -91,5 +92,7 @@ public interface PositionDao {
     void updateFailureStatusById(Integer positionId);
 
     void updateSuccessStatusById(Integer positionId);
+
+    List<ActivePositionListResponseDto> queryActivePositionList();
 }
 

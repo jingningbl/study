@@ -139,5 +139,12 @@
         WHERE dep_id = #{depId}
     </update>
 
+    <select id="queryActiveDepartmentList"
+            resultType="com.ssm1.dto.responseDto.ActiveDepartmentListResponseDto">
+        select dep_id, name
+        from reimburse.department
+        where status = 1
+    </select>
+
 </mapper>
 

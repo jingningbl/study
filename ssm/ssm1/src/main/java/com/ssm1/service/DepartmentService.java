@@ -73,4 +73,5 @@ public interface DepartmentService {
      */
     Map<String, Object> toggleStatus(ToggleDepartmentStatusRequestDto requestDto) throws Exception;
 
+    Map<String, Object> queryActiveDepartmentList();
 }

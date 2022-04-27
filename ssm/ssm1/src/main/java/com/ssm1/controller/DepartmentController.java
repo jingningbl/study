@@ -166,4 +166,19 @@ public class DepartmentController extends BaseController {
         map.put("success", true);
         return map;
     }
+
+    @ApiOperation(value = "查询有效的部门数据")
+    @PostMapping("queryActiveDepartmentList")
+    @ResponseBody
+    public Map<String, Object> queryActiveDepartmentList() {
+        Map<String, Object> map = null;
+        try {
+            map = departmentService.queryActiveDepartmentList();
+        } catch (Exception e) {
+            map = new HashMap<>();
+            map.put("success", false);
+            map.put("errMsg", e.getMessage());
+        }
+        return map;
+    }
 }

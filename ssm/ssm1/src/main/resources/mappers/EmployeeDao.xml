@@ -153,5 +153,10 @@
           AND password = #{password}
     </select>
 
+    <select id="queryPageList" resultMap="UserInfoMap">
+        select em_id, name, login_name, dep_id, position_id, status
+        from reimburse.employee ${ew.customSqlSegment}
+    </select>
+
 </mapper>
 

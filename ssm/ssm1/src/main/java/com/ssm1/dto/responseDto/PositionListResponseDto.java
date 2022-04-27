@@ -23,7 +23,7 @@ public class PositionListResponseDto implements Serializable {
     @ApiModelProperty(value = "职位名称",example = " ")
     private String positionName;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT")
     @ApiModelProperty(value = "职位地址",example = " ")
     private Date createTime;
 

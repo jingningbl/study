@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ssm1.dto.requestDto.DepartmentListRequestDto;
 import com.ssm1.dto.requestDto.PositionListRequestDto;
 import com.ssm1.dto.requestDto.TogglePositionStatusRequestDto;
+import com.ssm1.dto.responseDto.ActiveDepartmentListResponseDto;
+import com.ssm1.dto.responseDto.ActivePositionListResponseDto;
 import com.ssm1.dto.responseDto.DepartmentListResponseDto;
 import com.ssm1.dto.responseDto.PositionListResponseDto;
 import com.ssm1.entity.Position;
@@ -61,7 +63,7 @@ public class PositionServiceImpl implements PositionService {
      */
     @Override
     public Position insert(Position position) {
-        position.setCreateTime(new Date());
+//        position.setCreateTime(new Date());
         this.positionDao.insert(position);
         return position;
     }
@@ -139,6 +141,20 @@ public class PositionServiceImpl implements PositionService {
         } catch (Exception e) {
             //使用了声明式事物,必须要将异常抛出,否则事物失效
             throw e;
+        }
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> queryActivePositionList() {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            List<ActivePositionListResponseDto> position = positionDao.queryActivePositionList();
+            map.put("success", true);
+            map.put("data", position);
+        } catch (Exception e) {
+            map.put("success", false);
+            map.put("errMsg", e.getMessage());
         }
         return map;
     }

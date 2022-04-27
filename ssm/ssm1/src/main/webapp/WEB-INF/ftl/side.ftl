@@ -22,7 +22,7 @@
                     <a href="/position/toList"><i class="mdi mdi-tie"></i>职位管理</a>
                 </li>
                 <li class="nav-item">
-                    <a href="javascript:void(0)"><i class="mdi mdi-account-multiple"></i>员工管理</a>
+                    <a href="/employee/toList"><i class="mdi mdi-account-multiple"></i>员工管理</a>
                 </li>
             </ul>
         </nav>
