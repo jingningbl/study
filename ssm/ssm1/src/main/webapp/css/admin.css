@@ -1,7 +1,4 @@
 @charset "UTF-8";
-.select-picker{
-    height: 36px;
-    width: 150px;
-    border-color: #EBEBEB;
-
+#option{
+    background-color: #c6ece7;
 }

@@ -13,7 +13,7 @@
                     <a href="javascript:void(0)"><i class="mdi mdi-content-paste"></i>报销单</a>
                 </li>
                 <li class="nav-item">
-                    <a href="javascript:void(0)"><i class="mdi mdi-border-color"></i>填写报销单</a>
+                    <a href="/expenseReport/toAddExpenseReport"><i class="mdi mdi-border-color"></i>填写报销单</a>
                 </li>
                 <li class="nav-item">
                     <a href="/department/toList"><i class="mdi mdi-account-location"></i>部门管理</a>

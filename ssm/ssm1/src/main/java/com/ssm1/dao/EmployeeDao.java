@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ssm1.dto.requestDto.EmployeeListRequestDto;
 import com.ssm1.dto.responseDto.EmployeeDto;
+import com.ssm1.dto.responseDto.EmployeeResponseDto;
 import com.ssm1.entity.Employee;
 import org.apache.ibatis.annotations.Param;
 
@@ -31,7 +32,7 @@ public interface EmployeeDao {
      * 查询指定行数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     List<Employee> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
@@ -88,5 +89,9 @@ public interface EmployeeDao {
     EmployeeDto getEmInfoByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 
     IPage<EmployeeDto> queryPageList(Page<EmployeeListRequestDto> page, @Param(Constants.WRAPPER) QueryWrapper<EmployeeListRequestDto> wrapper);
+
+    void updateFailureStatusById(Integer emId);
+
+    void updateSuccessStatusById(Integer emId);
 }
 

@@ -46,15 +46,15 @@
                                 <#--pull-right有浮动,先加载的最右,,m-10各边距各10px,开关-->
                                 <div class="pull-right">
                                     <label>筛选职位
-                                        <select id="position-select" >
-                                            <option>全部</option>
+                                        <select id="position-select" class=" form-control">
+<#--                                            <option id="option">全部</option>-->
                                         </select>
                                     </label>
                                 </div>
                                 <div id="department" class="pull-right">
                                     <label>筛选部门
-                                        <select id="department-select" >
-                                            <option>全部</option>
+                                        <select id="department-select" class=" form-control">
+<#--                                            <option id="option">全部</option>-->
                                         </select>
                                     </label>
                                 </div>

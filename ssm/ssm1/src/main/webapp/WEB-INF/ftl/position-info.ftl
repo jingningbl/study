@@ -67,7 +67,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
 <#--                                        <button id="submit" class="btn btn-primary">确 定</button>-->
-                                        <button type="button" class="btn btn-default"
+                                        <button type="button" class="btn btn-primary"
                                                 onclick="javascript:history.back(-1);return false;">返 回
                                         </button>
                                     </div>

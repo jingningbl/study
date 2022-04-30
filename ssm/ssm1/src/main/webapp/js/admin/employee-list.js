@@ -44,9 +44,9 @@ $(function () {
     $.post(queryActiveDepartmentListUrl, function (data) {
         if (data.success) {
             let activeList = data.data
-            let optionHtml = '<option data-value="">全部</option>'
+            let optionHtml = '<option id="option" data-value="">全部</option>'
             activeList.map(function (item, index) {
-                optionHtml += '<option data-value="' + item.depId + '">' + item.name + '</option>'
+                optionHtml += '<option id="option" data-value="' + item.depId + '">' + item.name + '</option>'
             })
             $('#department-select').html(optionHtml)
         }
@@ -69,9 +69,9 @@ $(function () {
     $.post(queryActivePositionListUrl, function (data) {
         if (data.success) {
             let activeList = data.data
-            let optionHtml = '<option data-value="">全部</option>'
+            let optionHtml = '<option id="option" data-value="">全部</option>'
             activeList.map(function (item, index) {
-                optionHtml += '<option data-value="' + item.positionId + '">' + item.positionName + '</option>'
+                optionHtml += '<option id="option" data-value="' + item.positionId + '">' + item.positionName + '</option>'
             })
             $('#position-select').html(optionHtml)
         }
@@ -111,7 +111,7 @@ $(function () {
                         getPageInfo(data.data)
                         flag = false
                     }
-                    if (data.data.records.length == 0) {
+                    if (data.data.records.length === 0) {
                         lightyear.notify('没有符合条件的员工~', 'danger', 500,
                             'mdi mdi-emoticon-sad', 'top', 'center')
                     }

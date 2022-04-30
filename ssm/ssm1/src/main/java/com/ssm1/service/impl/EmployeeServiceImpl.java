@@ -4,12 +4,21 @@ import com.alibaba.druid.util.StringUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.ssm1.dao.DepartmentDao;
+import com.ssm1.dao.PositionDao;
 import com.ssm1.dto.requestDto.EmployeeListRequestDto;
+import com.ssm1.dto.requestDto.ToggleEmployeeStatusRequestDto;
+import com.ssm1.dto.responseDto.ActiveDepartmentListResponseDto;
+import com.ssm1.dto.responseDto.ActivePositionListResponseDto;
 import com.ssm1.dto.responseDto.EmployeeDto;
+import com.ssm1.dto.responseDto.EmployeeResponseDto;
 import com.ssm1.entity.Employee;
 import com.ssm1.dao.EmployeeDao;
 import com.ssm1.service.EmployeeService;
+import com.ssm1.util.Md5Util;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -28,6 +37,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Resource
     private EmployeeDao employeeDao;
 
+    @Resource
+    private DepartmentDao departmentDao;
+
+    @Resource
+    private PositionDao positionDao;
+
     /**
      * 通过ID查询单条数据
      *
@@ -35,8 +50,22 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return 实例对象
      */
     @Override
-    public Employee queryById(Integer emId) {
-        return this.employeeDao.queryById(emId);
+    public EmployeeResponseDto queryById(Integer emId) throws Exception {
+        try {
+            Employee employee = employeeDao.queryById(emId);
+            if (Objects.isNull(employee)) {
+                throw new RuntimeException("没有查询到员工信息");
+            }
+            EmployeeResponseDto employeeResponseDto = new EmployeeResponseDto();
+            List<ActivePositionListResponseDto> activePositionList = positionDao.queryActivePositionList();
+            List<ActiveDepartmentListResponseDto> activeDepartmentList = departmentDao.queryActiveDepartmentList();
+            employeeResponseDto.setEmployee(employee);
+            employeeResponseDto.setDepartmentList(activeDepartmentList);
+            employeeResponseDto.setPositionList(activePositionList);
+            return employeeResponseDto;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
     /**
@@ -59,6 +88,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     public Employee insert(Employee employee) {
+        employee.setPassword(Md5Util.getMd5("123456"));
         this.employeeDao.insert(employee);
         return employee;
     }
@@ -70,7 +100,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return 实例对象
      */
     @Override
-    public Employee update(Employee employee) {
+    public EmployeeResponseDto update(Employee employee) throws Exception {
         this.employeeDao.update(employee);
         return this.queryById(employee.getEmId());
     }
@@ -88,7 +118,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDto getEmInfoByUsernameAndPassword(String username, String password) {
-        return employeeDao.getEmInfoByUsernameAndPassword(username, password);
+        return employeeDao.getEmInfoByUsernameAndPassword(username, Md5Util.getMd5(password));
     }
 
     @Override
@@ -125,6 +155,27 @@ public class EmployeeServiceImpl implements EmployeeService {
             map.put("success", false);
             map.put("errMsg", e.getMessage());
             return map;
+        }
+        return map;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Override
+    public Map<String, Object> toggleStatus(ToggleEmployeeStatusRequestDto requestDto) {
+        Map<String, Object> map = new HashMap<>();
+        Integer emId = requestDto.getEmId();
+        Integer status = requestDto.getStatus();
+        try {
+            if (status == 1) {
+                //状态禁用
+                employeeDao.updateFailureStatusById(emId);
+            } else {
+                //状态启用
+                employeeDao.updateSuccessStatusById(emId);
+            }
+            map.put("success", true);
+        } catch (Exception e) {
+            throw e;
         }
         return map;
     }

@@ -57,11 +57,19 @@
                                     <div class="form-group col-md-12">
                                         <label for="department-select">部门</label>
                                         <select class="form-control" id="department-select" name="department-select">
+                                            <option value="0">测试</option>
+                                            <option value="1">开发</option>
+                                            <option value="2">运维</option>
+                                            <option value="3">UI</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="position-select">职位</label>
                                         <select class="form-control" id="position-select" name="position-select">
+                                            <option value="0">测试</option>
+                                            <option value="1">开发</option>
+                                            <option value="2">运维</option>
+                                            <option value="3">UI</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-12">

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-    <title>新增员工</title>
+    <title>员工详情</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/materialdesignicons.min.css" rel="stylesheet">
     <!--标签插件-->
@@ -47,37 +47,37 @@
                                     <div class="form-group col-md-12">
                                         <label for="em-name">姓名</label>
                                         <input type="text" class="form-control" id="em-name" name="em-name" value=""
-                                               placeholder="请输入员工姓名"/>
+                                               placeholder="请输入员工姓名" disabled/>
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <label for="em-loginName">账号(手机号,默认密码123456)</label>
+                                        <label for="em-loginName">账号</label>
                                         <input type="text" class="form-control" id="em-loginName" name="em-loginName"
-                                               value="" placeholder="请输入账号"/>
+                                               value="" placeholder="请输入账号" disabled/>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="department-select">部门</label>
-                                        <select class="form-control" id="department-select" name="department-select">
+                                        <select disabled class="form-control" id="department-select" name="department-select">
                                         </select>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="position-select">职位</label>
-                                        <select class="form-control" id="position-select" name="position-select">
+                                        <select disabled class="form-control" id="position-select" name="position-select">
                                         </select>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="status">状态</label>
                                         <div class="clearfix">
                                             <label class="lyear-radio radio-inline radio-primary">
-                                                <input type="radio" id="status-off" name="status" value="0"><span>禁用</span>
+                                                <input disabled type="radio" id="status-off" name="status" value="0"><span>禁用</span>
                                             </label>
                                             <label class="lyear-radio radio-inline radio-primary">
-                                                <input type="radio" id="status-on" name="status" value="1" checked="checked"><span>启用</span>
+                                                <input disabled type="radio" id="status-on" name="status" value="1" checked="checked"><span>启用</span>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <button id="submit" class="btn btn-primary">确 定</button>
-                                        <button type="button" class="btn btn-default"
+<#--                                        <button id="submit" class="btn btn-primary">确 定</button>-->
+                                        <button type="button" class="btn btn-primary"
                                                 onclick="javascript:history.back(-1);return false;">返 回
                                         </button>
                                     </div>

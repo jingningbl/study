@@ -3,6 +3,8 @@ package com.ssm1.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssm1.dto.requestDto.EmployeeListRequestDto;
+import com.ssm1.dto.requestDto.ToggleEmployeeStatusRequestDto;
+import com.ssm1.dto.responseDto.EmployeeResponseDto;
 import com.ssm1.entity.Employee;
 import com.ssm1.service.EmployeeService;
 import io.swagger.annotations.Api;
@@ -22,8 +24,8 @@ import java.util.Map;
 @Controller
 @Api(tags = "员工管理")
 @RequestMapping("employee")
-public class EmployeeController extends BaseController{
-    
+public class EmployeeController extends BaseController {
+
     @Autowired
     private EmployeeService employeeService;
 
@@ -79,90 +81,90 @@ public class EmployeeController extends BaseController{
         }
         return map;
     }
-//
-//    @ApiOperation(value = "对单个员工的状态进行切换")
-//    @PostMapping("toggleEmployeeStatus")
-//    @ResponseBody
-//    public Map<String, Object> toggleEmployeeStatus(@RequestBody ToggleEmployeeStatusRequestDto requestDto) {
-//        Map<String, Object> map = null;
-//        try {
-//            map = employeeService.toggleStatus(requestDto);
-//        } catch (Exception e) {
-//            map = new HashMap<>();
-//            map.put("success", false);
-//            map.put("errMsg", e.getMessage());
-//        }
-//        return map;
-//    }
-//
-//    /**
-//     * @RequestParam String employeeStr
-//     */
-//    @PostMapping("insertEmployee")
-//    @ResponseBody
-//    @ApiOperation(value = "新增员工")
-//    public Map<String, Object> insertEmployee(@RequestParam String employeeStr) {
-//        Map<String, Object> map = new HashMap<>();
-//        Employee employee = null;
-//        ObjectMapper mapper = new ObjectMapper();
-//        try {
-//            employee = mapper.readValue(employeeStr, Employee.class);
-//        } catch (JsonProcessingException e) {
-//            map.put("success", false);
-//            map.put("errMsg", "传入的json格式不对");
-//            return map;
-//        }
-//        try {
-//            employeeService.insert(employee);
-//        } catch (Exception e) {
-//            map.put("success", false);
-//            map.put("errMsg", e.getMessage());
-//            return map;
-//        }
-//        map.put("success", true);
-//        return map;
-//    }
-//
-//    @PostMapping("queryEmployee")
-//    @ApiOperation(value = "查看指定员工信息")
-//    @ResponseBody
-//    public Map<String, Object> queryEmployeeById(Integer employeeId) {
-//        Map<String, Object> map = new HashMap<>();
-//        Employee employee = null;
-//        try {
-//            employee = employeeService.queryById(employeeId);
-//        } catch (Exception e) {
-//            map.put("success", false);
-//            map.put("errMsg", e.getMessage());
-//            return map;
-//        }
-//        map.put("success", true);
-//        map.put("data", employee);
-//        return map;
-//    }
-//
-//    @PostMapping("editEmployee")
-//    @ApiOperation(value = "修改指定员工信息")
-//    @ResponseBody
-//    public Map<String, Object> editEmployeeById(@RequestParam String employeeStr) {
-//        Map<String, Object> map = new HashMap<>();
-//        Employee employee = null;
-//        ObjectMapper mapper = new ObjectMapper();
-//        try {
-//            employee = mapper.readValue(employeeStr, Employee.class);
-//        } catch (JsonProcessingException e) {
-//            map.put("success", false);
-//            map.put("errMsg", "传入的json格式不对");
-//            return map;
-//        }
-//        try {
-//            employeeService.update(employee);
-//        } catch (Exception e) {
-//            map.put("success", false);
-//            map.put("errMsg", e.getMessage());
-//            return map;
-//        }
-//        map.put("success", true);
-//        return map;
-//    }
+
+    @ApiOperation(value = "对单个员工的状态进行切换")
+    @PostMapping("toggleEmployeeStatus")
+    @ResponseBody
+    public Map<String, Object> toggleEmployeeStatus(@RequestBody ToggleEmployeeStatusRequestDto requestDto) {
+        Map<String, Object> map = null;
+        try {
+            map = employeeService.toggleStatus(requestDto);
+        } catch (Exception e) {
+            map = new HashMap<>();
+            map.put("success", false);
+            map.put("errMsg", e.getMessage());
+        }
+        return map;
+    }
+
+    /**
+     * @RequestParam String employeeStr
+     */
+    @PostMapping("insertEmployee")
+    @ResponseBody
+    @ApiOperation(value = "新增员工")
+    public Map<String, Object> insertEmployee(@RequestParam String employeeStr) {
+        Map<String, Object> map = new HashMap<>();
+        Employee employee = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            employee = mapper.readValue(employeeStr, Employee.class);
+        } catch (JsonProcessingException e) {
+            map.put("success", false);
+            map.put("errMsg", "传入的json格式不对");
+            return map;
+        }
+        try {
+            employeeService.insert(employee);
+        } catch (Exception e) {
+            map.put("success", false);
+            map.put("errMsg", e.getMessage());
+            return map;
+        }
+        map.put("success", true);
+        return map;
+    }
+
+    @PostMapping("queryEmployee")
+    @ApiOperation(value = "查看指定员工信息")
+    @ResponseBody
+    public Map<String, Object> queryEmployeeById(Integer employeeId) {
+        Map<String, Object> map = new HashMap<>();
+        EmployeeResponseDto employee = null;
+        try {
+            employee = employeeService.queryById(employeeId);
+        } catch (Exception e) {
+            map.put("success", false);
+            map.put("errMsg", e.getMessage());
+            return map;
+        }
+        map.put("success", true);
+        map.put("data", employee);
+        return map;
+    }
+
+    @PostMapping("editEmployee")
+    @ApiOperation(value = "修改指定员工信息")
+    @ResponseBody
+    public Map<String, Object> editEmployeeById(@RequestParam String employeeStr) {
+        Map<String, Object> map = new HashMap<>();
+        Employee employee = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            employee = mapper.readValue(employeeStr, Employee.class);
+        } catch (JsonProcessingException e) {
+            map.put("success", false);
+            map.put("errMsg", "传入的json格式不对");
+            return map;
+        }
+        try {
+            employeeService.update(employee);
+        } catch (Exception e) {
+            map.put("success", false);
+            map.put("errMsg", e.getMessage());
+            return map;
+        }
+        map.put("success", true);
+        return map;
+    }
 }

@@ -1,7 +1,9 @@
 package com.ssm1.service;
 
 import com.ssm1.dto.requestDto.EmployeeListRequestDto;
+import com.ssm1.dto.requestDto.ToggleEmployeeStatusRequestDto;
 import com.ssm1.dto.responseDto.EmployeeDto;
+import com.ssm1.dto.responseDto.EmployeeResponseDto;
 import com.ssm1.entity.Employee;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +22,7 @@ public interface EmployeeService {
      * @param emId 主键
      * @return 实例对象
      */
-    Employee queryById(Integer emId);
+    EmployeeResponseDto queryById(Integer emId) throws Exception;
 
     /**
      * 查询多条数据
@@ -45,7 +47,7 @@ public interface EmployeeService {
      * @param employee 实例对象
      * @return 实例对象
      */
-    Employee update(Employee employee);
+    EmployeeResponseDto update(Employee employee) throws Exception;
 
     /**
      * 通过主键删除数据
@@ -58,4 +60,6 @@ public interface EmployeeService {
     EmployeeDto getEmInfoByUsernameAndPassword(String username, String password);
 
     Map<String, Object> queryPageList(EmployeeListRequestDto requestDto);
+
+    Map<String, Object> toggleStatus(ToggleEmployeeStatusRequestDto requestDto);
 }

@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-    <title>新增员工</title>
+    <title>新增报销单</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/materialdesignicons.min.css" rel="stylesheet">
     <!--标签插件-->
     <#--    <link rel="stylesheet" href="/js/jquery-tags-input/jquery.tagsinput.min.css">-->
-        <link href="/css/style.min.css" rel="stylesheet">
+    <link href="/css/style.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -45,24 +45,14 @@
                                     <#--                                        </div>-->
                                     <#--                                    </div>-->
                                     <div class="form-group col-md-12">
-                                        <label for="em-name">姓名</label>
-                                        <input type="text" class="form-control" id="em-name" name="em-name" value=""
-                                               placeholder="请输入员工姓名"/>
+                                        <label for="dep-name">报销单名称</label>
+                                        <input type="text" class="form-control" id="dep-name" name="dep-name" value=""
+                                               placeholder="请输入报销单名称"/>
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <label for="em-loginName">账号(手机号,默认密码123456)</label>
-                                        <input type="text" class="form-control" id="em-loginName" name="em-loginName"
-                                               value="" placeholder="请输入账号"/>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for="department-select">部门</label>
-                                        <select class="form-control" id="department-select" name="department-select">
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for="position-select">职位</label>
-                                        <select class="form-control" id="position-select" name="position-select">
-                                        </select>
+                                        <label for="dep-address">报销单地址</label>
+                                        <input type="text" class="form-control" id="dep-address" name="dep-address"
+                                               value="" placeholder="请输入报销单地址"/>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="status">状态</label>
@@ -106,6 +96,6 @@
 <script type="text/javascript" src="/js/lightyear.js"></script>
 <script type="text/javascript" src="/js/main.min.js"></script>
 <script type="text/javascript" src="/js/admin/common.js"></script>
-<script type="text/javascript" src="/js/admin/employee-option.js"></script>
+<script type="text/javascript" src="/js/admin/department-option.js"></script>
 </body>
 </html>
