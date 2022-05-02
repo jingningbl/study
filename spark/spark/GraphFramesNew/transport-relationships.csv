@@ -1,0 +1,10 @@
+src,dst,relationship,cost
+"A城市","B城市","ROAD",26
+"A城市","C城市","ROAD",10
+"A城市","D城市","ROAD",25
+"A城市","F城市","ROAD",5
+"F城市","G城市""ROAD",5
+"B城市","E城市","ROAD",5
+"C城市","E城市","ROAD",20
+"D城市","E城市","ROAD",45
+"G城市","E城市""ROAD",5

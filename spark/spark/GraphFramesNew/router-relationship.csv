@@ -1,0 +1,8 @@
+src,dst
+routerA,routerB
+routerA,routerC
+routerA,routerD
+routerC,routerD
+routerC,routerE
+routerD,routerE
+routerF,routerG
