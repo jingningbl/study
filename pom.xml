@@ -34,6 +34,7 @@
         <module>spring/spring8</module>
         <module>spring/spring9</module>
         <module>spring/spring10</module>
+        <module>spring/spring11</module>
     </modules>
 
     <properties>
