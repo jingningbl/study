@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>炫酷的ECharts</title>
+</head>
+
+
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width: 800px;height:500px;margin: 0 auto;"></div>
+ 
+<!--引入jquery.js-->
+<script src="../static/js/jquery-3.6.0.min.js"></script>
+<!--引入echarts.js-->
+<script src="../static/js/echarts.js"></script>
+<script type="text/javascript">
+
+    var myChart = echarts.init(document.getElementById('main'));
+
+    var app = {
+        xday: [],
+        yvalue: []
+    };
+
+    // 发送ajax请求，从后台获取json数据
+    $(document).ready(function () {
+        getData();
+        console.log(app.xday);
+        console.log(app.yvalue)
+    });
+
+    function getData() {
+        $.ajax({
+            url: 'http://127.0.0.1:5000/test',
+            data: {},
+            type: 'GET',
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                app.xday = data.xdays;
+                app.yvalue = data.yvalues;
+                myChart.setOption({
+                    title: {
+                        text: '异步数据加载示例'
+                    },
+                    tooltip: {},
+                    legend: {
+                        data: ['销量']
+                    },
+                    xAxis: {
+                        data: app.xday
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '销量',
+                        type: 'bar',
+                        data: app.yvalue
+                    }]
+                })
+            },
+            error: function (msg) {
+                console.log(msg);
+                alert('系统发生错误');
+            }
+        })
+    };
+
+</script>
+</body>
+
+</html>
